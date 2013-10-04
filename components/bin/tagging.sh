@@ -5,34 +5,22 @@
 #
 # Author: Grzegorz Chrupala and Benjamin Roth
 
-UNWRAP=$TAC_ROOT/components/ner/bin/Unwrap
-MODEL=$TAC_ROOT/components/ner/data/bbn-wsj-02-21.reduced2,r0.001,b10,i10.model
+
 SPECIALENT=$TAC_ROOT/resources/special_NE_list/
 
-cat $1 \
-|$UNWRAP +RTS -K100m -H700m -A100m -RTS $MODEL\
- $SPECIALENT/JOB_TITLE $SPECIALENT/NORP:RELIGION\
- $SPECIALENT/CAUSE_DEATH $SPECIALENT/CHARGES > $2
+# Convert to pure CoNLL format
+$TAC_ROOT/components/ner/bin/tac-conll to-conll $1 > $1.conll.tmp
 
-## TODO BEWARE CAUTION
-## This is a workaround. Needed b/c old version of Haskell can not handle UTF8.
-## drank is utf8 encoded. We convert it into latin1, feed it to tagging module, and convert it back later.
-## This is lossy, though.
-#fromenc=utf8
-#toenc=latin1
-#tmpfilein=$1.$toenc.tmp
-#tmpfileout=$2.$toenc.tmp
-## -c enables silent dropping of chars.
-#iconv -c -f $fromenc -t $toenc -o $tmpfilein $1
-#
-#cat $tmpfilein \
-#|$UNWRAP +RTS -K100m -H700m -A100m -RTS $MODEL\
-# $SPECIALENT/JOB_TITLE $SPECIALENT/NORP:RELIGION\
-# $SPECIALENT/CAUSE_DEATH $SPECIALENT/CHARGES > $tmpfileout
-#
-#
-## convert back, and correct tagging for brackets, B-I-O tags etc.
-#iconv -c -f $toenc -t $fromenc $tmpfileout \
-#| $TAC_ROOT/components/bin/run.sh run.TaggingCorrector > $2
+# Run tagger
+cat $1.conll.tmp | $TAC_ROOT/components/ner/lib/sequor/bin/seminer en > $1.sequor.tmp
 
+# Add special entities
+paste -d' ' $1.conll.tmp $1.sequor.tmp | $TAC_ROOT/components/ner/bin/specialents \
+           $SPECIALENT/JOB_TITLE $SPECIALENT/NORP:RELIGION\
+           $SPECIALENT/CAUSE_DEATH $SPECIALENT/CHARGES > $1.ent.tmp
 
+# Convert back to TAC format
+$TAC_ROOT/components/ner/bin/tac-conll from-conll $1 $1.ent.tmp > $2
+
+# Clean up tmp files
+rm -f $1.conll.tmp  $1.sequor.tmp $1.ent.tmp
