@@ -11,14 +11,15 @@ lib/sequor: lib/0.4.2.tar.gz
         tar zxf 0.4.2.tar.gz;\
         mv gchrupala-sequor-469faf10774f sequor/;\
         cd sequor;\
-        cabal install --prefix=`pwd` 
+        cabal update;\
+        cabal install --bindir=`pwd`/bin --datadir=`pwd`/share 
 
 bin/tac-conll bin/specialents: src/specialents.hs src/tac-conll.hs ner.cabal
-	mkdir -p .cabal;\
-        cabal install --prefix=`pwd`
+	cabal install --bindir=`pwd`/bin
 
 clean:
 	-rm -rf lib/sequor
+	-rm -rf share
 	-cabal clean
 	-rm bin/tac-conll bin/specialents
 
