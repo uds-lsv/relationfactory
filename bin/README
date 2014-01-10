@@ -1,0 +1,8 @@
+Directory Contents
+==================
+
+generate_system.sh   : initial building/compilation of the system
+get_config.sh        : querying a configuration setting
+get_expand_config.sh : querying a configuration setting, and expanding system variables
+makefile             : makefile modelling the dependencies between different stages
+run.sh               : running the pipeline
