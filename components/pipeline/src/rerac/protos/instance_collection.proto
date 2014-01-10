@@ -1,0 +1,30 @@
+package rerac.protos;
+
+// Mapping from string representations of features and classes to indices.
+message FeatureMap {
+  repeated string feature = 1;
+  repeated int32 featureHash = 2;
+  // Categories classification is done about (this is not like a 
+  // positive-negative label, more like classes).
+  repeated string category = 3;
+}
+
+// Training/testing instance with features and labels.
+message Instance {
+  // Features indices need to be sorted in ascending order at all times.
+  repeated Feature feature = 1;
+  // Label of the class the in
+  optional int32 category_index = 2 [default = 0];
+  optional string category = 3;
+  optional bool positive = 4 [default = true];
+  message Feature {
+    required int32 index = 1;
+    required double value = 2;
+  }
+}
+
+// Collection of instances with corresponding feature map.
+message InstanceCollectionPB {
+  required FeatureMap map = 1;
+  repeated Instance instance = 2;
+}

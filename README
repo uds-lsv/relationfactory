@@ -1,0 +1,53 @@
+QUICK START
+===========
+-----
+export the paths (e.g. to your ~/.bashrc) (replace "path-to" with the path where you plan to check out the system):
+
+export TAC_ROOT=/path-to/tac_kbp_system
+
+-----
+"generate" (prepare/install/...) the system: 
+ 
+#> $TAC_ROOT/bin/generate_system.sh
+
+-----
+
+run the system on the 2011 data (replace "test-run" with a path NOT under $TAC_ROOT):
+
+#> cd /test-run/
+#> $TAC_ROOT/bin/run.sh $TAC_ROOT/evaluation/eval2011/queries_2012format.xml
+
+NOTE: The whole system assumes all data to be in the latest (=2012) format.
+Therefore, to run evaluations from previous years, converted queries have
+to be used (marked by 2012format, or similar).
+
+
+check the output file, '/test-run/response'. It should contain for each query 
+some mixture of NIL answers and other answers, many of which score by 1.0, 
+others with lower score.
+
+Evaluate your run:
+
+$TAC_ROOT/evaluation/bin/score.sh response $TAC_ROOT/evaluation/eval2011/key_2012format
+
+Directories
+===========
+
+./bin           : top-level executables
+./components    : components of the system
+./config        : configuration files
+./doc           : documents describing (previous versions of) the system
+./evaluation    : evaluation scripts and data
+./lib           : 3rd party software
+./resources     : data used by the system (NE lists, index, etc)
+./training      : training scripts
+
+*/experimental directories are not yet part of the standard pipeline.
+
+Each directory has an own README describing its contents.
+
+How to change the pipeline
+==========================
+
+Change ./bin/makefile and insert a rule describing your new target.
+

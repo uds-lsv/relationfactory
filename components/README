@@ -1,0 +1,9 @@
+Directory Contents
+==================
+
+./bin/    : commands corresponding to steps in the pipeline
+./ner/    : NE tagging
+./pipeline/  : Java code for pipeline steps -- usually called by commands in ./bin/
+./sentence_segmentation
+./tools   : standalone convenience tools (like format conversions)
+
