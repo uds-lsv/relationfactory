@@ -1,0 +1,80 @@
+<project name="simpleCompile" default="experimental" basedir=".">
+  <property name="sourceDir" value="src"/>
+	<property name="testDir" value="test"/>
+  <property name="buildDir" value="classes"/>
+  <property name="distDir" value="dist"/>
+  <target name="clean">
+    <delete dir="${distDir}" />
+    <delete dir="${buildDir}" />
+  </target>
+  <target name="prepare" depends="clean">
+    <mkdir dir="${distDir}" />
+    <mkdir dir="${buildDir}" />
+  </target>
+  <target name="compile_no_experimental" depends="prepare">
+    <javac destdir="${buildDir}" debug="false" debuglevel="lines,vars,source">
+      <src path="${sourceDir}" />
+      <classpath>
+        <fileset dir="lib">
+          <include name="**/*.jar"/>
+        </fileset>
+      	<fileset dir="lib_unsupervised_parsing">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+      <include name="**" />
+      <exclude name="experimental/**"/>
+    </javac>
+  </target>
+  <target name="compile" depends="prepare">
+    <javac srcdir="${sourceDir}" destdir="${buildDir}" debug="false" debuglevel="lines,vars,source">
+      <classpath>
+        <fileset dir="lib">
+          <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="lib_unsupervised_parsing">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </javac>
+  </target>
+  <target name="dist" depends="compile_no_experimental">
+    <mkdir dir="${distDir}"/>
+    <jar jarfile="${distDir}/components.jar"
+   basedir="${buildDir}"/>
+  </target>
+  <target name="experimental" depends="compile">
+    <mkdir dir="${distDir}"/>
+    <jar jarfile="${distDir}/components.jar"
+     basedir="${buildDir}"/>
+  </target>
+	<target name="compile_test" depends="compile">
+		<javac srcdir="${testDir}" destdir="${buildDir}" debug="true" debuglevel="lines,vars,source">
+      <classpath>
+        <fileset dir="lib">
+          <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="lib_unsupervised_parsing">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </javac>
+  </target>
+	<target name="run_test" depends="compile_test">
+		<junit printsummary="yes">
+		    <classpath>
+		    	<pathelement location="${buildDir}" />
+		    	<fileset dir="lib">
+	          <include name="**/*.jar"/>
+	        </fileset>
+		    </classpath>    
+		    <batchtest>
+		       <fileset dir="${testDir}">
+		            <include name="**/*Test*" />
+		            <exclude name="testutil/**"/>
+		       </fileset>
+		    </batchtest>
+		    <formatter type="brief" usefile="false"/>
+		  </junit>
+	  </target>
+</project>
