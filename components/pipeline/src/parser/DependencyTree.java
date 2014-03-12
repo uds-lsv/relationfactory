@@ -14,8 +14,6 @@ import rerac.protos.Corpus.Document.Token;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-import edu.stanford.nlp.trees.TypedDependency;
-
 /**
  * This holds a dependency tree, typically constructed from a parsed document.
  * At the moment used to get a string feature for pairs of tokens from their

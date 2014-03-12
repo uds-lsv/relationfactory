@@ -1,6 +1,5 @@
-package experimental.reasoning;
+package util;
 
-import experimental.reasoning.Pair;
 
 public class Pair<Type> {
 	private Type el1;

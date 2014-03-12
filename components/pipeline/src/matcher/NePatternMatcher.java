@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import experimental.reasoning.Pair;
+import util.Pair;
 
 import rerac.protos.Corpus.Document;
 import util.DocumentExtractor;
