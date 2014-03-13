@@ -1,0 +1,14 @@
+# Words that are in either top-10 wrong words in 2012 or in top-20 wrong words 2009-2011, and have less the 20% precision in either, if present.
+# Occurrence in 2012 list alone is not enough.
+per:title member
+per:title leader
+per:title master
+per:title champion
+per:title advocate
+per:title chief
+per:title official
+per:title minister
+per:title student
+per:title critic
+per:title citizen
+

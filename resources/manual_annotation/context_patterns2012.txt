@@ -1,0 +1,1154 @@
+# Simple high precision patterns for kbp relations.
+# Patterns wildcard target and slotfiller as $ARG1 and $ARG2.
+# For reflexive relations, both arguments are wildcarded as $ARG0.
+# There is also a wildcard '*' standing for 1-4 arbitrary tokens. 
+# The patterns are meant to be sent to a search engine, and the results
+# to be filtered by a suitable type checker. In the combination with a type
+# checker, the patterns should unambiguously express the relation.
+# Basis for the patterns were:
+#  - The definition of the slots using the TAC KBP guidelines of 2011,
+#  - The examples given in the guidelines, and
+#  - introspection/linguistic intuition generalizing from both.
+# No actual queries/slot fillers/assessments of the task were looked at.
+# It cannot be assumed that matching is done case invariant. However, patterns
+# should not be combinatorially blown up to incorporate different casing 
+# variants, and always the correct/most common casing should be used only.
+
+# TODO: tokenization: "," vs " ," "'s" vs " 's", "'" vs " '", "(" vs "( "
+# Is this reflexive?
+per:alternate_names $ARG1 formerly known as $ARG2
+per:alternate_names $ARG1 aka $ARG2
+per:alternate_names $ARG1 a.k.a. $ARG2
+per:alternate_names $ARG1 a. k. a. $ARG2
+per:alternate_names $ARG1 is also known as $ARG2
+per:alternate_names $ARG1 is known as $ARG2
+per:alternate_names $ARG1 , also known as $ARG2
+per:alternate_names $ARG1 , better known as $ARG2
+per:alternate_names $ARG1 , best known as $ARG2
+per:alternate_names $ARG1 , aka $ARG2
+per:alternate_names $ARG1 , a.k.a. $ARG2
+per:alternate_names $ARG1 , a. k. a. $ARG2
+per:alternate_names $ARG1 ( also known as $ARG2 )
+per:alternate_names $ARG1 ( better known as $ARG2 )
+# This overgeneralizes too much (e.g. actors playing roles).
+#per:alternate_names $ARG1 ( $ARG2 )
+per:alternate_names $ARG1 ( aka $ARG2 )
+per:alternate_names $ARG1 ( a.k.a. $ARG2 )
+per:alternate_names $ARG1 ( a. k. a. $ARG2 )
+
+# 'on'/'in' should be part of the date string
+per:date_of_birth $ARG1 ( born $ARG2 )
+per:date_of_birth $ARG1 ( born $ARG2 in
+per:date_of_birth $ARG1 ( $ARG2 -
+per:date_of_birth $ARG1 was born $ARG2
+per:date_of_birth $ARG1 , born $ARG2 in
+
+per:age $ARG1 died at the age of $ARG2
+per:age $ARG1 , who turned $ARG2
+per:age $ARG1 , who turns $ARG2
+per:age $ARG1 turned $ARG2
+per:age $ARG1 turns $ARG2
+per:age $ARG1 is $ARG2 years old
+# high-recall vs. high-precision patterns
+per:age $ARG1 , $ARG2 ,
+
+#per:country_of_birth $ARG1 , the $ARG2-born
+per:country_of_birth $ARG1 , $ARG2-born
+per:country_of_birth $ARG1 was born in $ARG2
+per:country_of_birth $ARG1 is born in $ARG2
+per:country_of_birth $ARG1 , born in $ARG2
+per:country_of_birth $ARG1 , being born in $ARG2
+per:country_of_birth $ARG1 is a native $ARG2
+per:country_of_birth $ARG1 , a native $ARG2
+per:country_of_birth $ARG1 was born * in $ARG2
+per:country_of_birth $ARG1 is a native of $ARG2
+per:country_of_birth $ARG1 , a native of $ARG2
+per:country_of_birth $ARG2 born $ARG1
+per:country_of_birth $ARG2 -born $ARG1
+per:country_of_birth $ARG2 - born $ARG1
+
+per:stateorprovince_of_birth $ARG1 was born in $ARG2
+per:stateorprovince_of_birth $ARG1 is born in $ARG2
+per:stateorprovince_of_birth $ARG1 , born in $ARG2
+per:stateorprovince_of_birth $ARG1 , being born in $ARG2
+per:stateorprovince_of_birth $ARG1 was born in the state of $ARG2
+per:stateorprovince_of_birth $ARG1 is born in the state of $ARG2
+per:stateorprovince_of_birth $ARG1 , born in the state of $ARG2
+per:stateorprovince_of_birth $ARG1 , being born in the state of $ARG2
+per:stateorprovince_of_birth $ARG1 was born in the province of $ARG2
+per:stateorprovince_of_birth $ARG1 is born in the province of $ARG2
+per:stateorprovince_of_birth $ARG1 , born in the province of $ARG2
+per:stateorprovince_of_birth $ARG1 , being born in the province of $ARG2
+per:stateorprovince_of_birth $ARG1 was born in * , $ARG2
+per:stateorprovince_of_birth $ARG1 was born * in * , $ARG2
+per:stateorprovince_of_birth $ARG1 , born in * , $ARG2
+per:stateorprovince_of_birth $ARG1 , born * in * , $ARG2
+
+per:city_of_birth $ARG1 was born in $ARG2
+per:city_of_birth $ARG1 is born in $ARG2
+per:city_of_birth $ARG1 , born in $ARG2
+per:city_of_birth $ARG1 's birthplace $ARG2
+per:city_of_birth $ARG1 ' birthplace $ARG2
+per:city_of_birth $ARG2 , $ARG1 's birthplace
+per:city_of_birth $ARG2 , $ARG1 ' birthplace
+per:city_of_birth $ARG2 , the birthplace of $ARG1
+per:city_of_birth $ARG1 was born * in $ARG2
+per:city_of_birth $ARG1 was born in the city of $ARG2
+per:city_of_birth $ARG1 was born in the town of $ARG2
+per:city_of_birth $ARG1 , born * in $ARG2
+per:city_of_birth $ARG1 , born in the city of $ARG2
+per:city_of_birth $ARG1 , born in the town of $ARG2
+
+per:origin $ARG1 , a $ARG2 citizen
+per:origin $ARG1 , an $ARG2 citizen
+per:origin $ARG1 , who is a $ARG2 citizen
+per:origin $ARG1 , who is an $ARG2 citizen
+per:origin $ARG1 is a $ARG2 citizen
+per:origin $ARG1 , originally from $ARG2
+per:origin $ARG1 from $ARG2
+per:origin $ARG2 citizen $ARG1
+per:origin $ARG1 , born in $ARG2
+per:origin $ARG1 was born in $ARG2
+
+# TODO: automatically expand "Xed" -> "who Xed" , " , who Xed"
+# 'on'/'in' part of date string
+per:date_of_death $ARG1 died $ARG2
+per:date_of_death $ARG1 ( died $ARG2 )
+per:date_of_death $ARG1 succumbed to * $ARG2
+per:date_of_death $ARG1 passed away $ARG2
+per:date_of_death $ARG1 who died $ARG2
+per:date_of_death $ARG1 who succumbed to * $ARG2
+per:date_of_death $ARG1 who passed away $ARG2
+per:date_of_death $ARG1 , who died $ARG2
+per:date_of_death $ARG1 , who succumbed to * $ARG2
+per:date_of_death $ARG1 , who passed away $ARG2
+#35	\Q\E(the )?\Q$ARG1 died \E(the )?\Q$ARG2\E
+#57	\Q\E(the )?\Q$ARG1 , who died \E(the )?\Q$ARG2\E
+
+per:country_of_death $ARG1 died in $ARG2
+per:country_of_death $ARG1 was killed in $ARG2
+per:country_of_death $ARG1 succumbed to * in $ARG2
+per:country_of_death $ARG1 passed away $ARG2
+per:country_of_death $ARG1 who died in $ARG2
+per:country_of_death $ARG1 who was killed in $ARG2
+per:country_of_death $ARG1 who succumbed to * in $ARG2
+per:country_of_death $ARG1 who passed away $ARG2
+per:country_of_death $ARG1 , who died in $ARG2
+per:country_of_death $ARG1 , who was killed in $ARG2
+per:country_of_death $ARG1 , who succumbed to * in $ARG2
+per:country_of_death $ARG1 , who passed away $ARG2
+per:country_of_death $ARG1 died * in $ARG2
+per:country_of_death $ARG1 , who died * in $ARG2
+per:country_of_death $ARG1 died * in * , $ARG2
+per:country_of_death $ARG1 , who died * in * , $ARG2
+
+per:stateorprovince_of_death $ARG1 died in $ARG2
+per:stateorprovince_of_death $ARG1 was killed in $ARG2
+per:stateorprovince_of_death $ARG1 succumbed to * in $ARG2
+per:stateorprovince_of_death $ARG1 passed away $ARG2
+per:stateorprovince_of_death $ARG1 who died in $ARG2
+per:stateorprovince_of_death $ARG1 who was killed in $ARG2
+per:stateorprovince_of_death $ARG1 who succumbed to * in $ARG2
+per:stateorprovince_of_death $ARG1 who passed away $ARG2
+per:stateorprovince_of_death $ARG1 , who died in $ARG2
+per:stateorprovince_of_death $ARG1 , who was killed in $ARG2
+per:stateorprovince_of_death $ARG1 , who succumbed to * in $ARG2
+per:stateorprovince_of_death $ARG1 , who passed away $ARG2
+per:stateorprovince_of_death $ARG1 died * in $ARG2
+per:stateorprovince_of_death $ARG1 , who died * in $ARG2
+per:stateorprovince_of_death $ARG1 died * in * , $ARG2
+per:stateorprovince_of_death $ARG1 , who died * in * , $ARG2
+per:stateorprovince_of_death $ARG1 died * in the province of $ARG2
+per:stateorprovince_of_death $ARG1 , who died * in the province of $ARG2
+per:stateorprovince_of_death $ARG1 died in the province of $ARG2
+per:stateorprovince_of_death $ARG1 , who died in the province of $ARG2
+per:stateorprovince_of_death $ARG1 died * in the state of $ARG2
+per:stateorprovince_of_death $ARG1 , who died * in the state of $ARG2
+per:stateorprovince_of_death $ARG1 died in the state of $ARG2
+per:stateorprovince_of_death $ARG1 , who died in the state of $ARG2
+
+per:city_of_death $ARG1 died in $ARG2
+per:city_of_death $ARG1 was killed in $ARG2
+per:city_of_death $ARG1 succumbed to * in $ARG2
+per:city_of_death $ARG1 passed away $ARG2
+per:city_of_death $ARG1 who died in $ARG2
+per:city_of_death $ARG1 who was killed in $ARG2
+per:city_of_death $ARG1 who succumbed to * in $ARG2
+per:city_of_death $ARG1 who passed away $ARG2
+per:city_of_death $ARG1 , who died in $ARG2
+per:city_of_death $ARG1 , who was killed in $ARG2
+per:city_of_death $ARG1 , who succumbed to * in $ARG2
+per:city_of_death $ARG1 , who passed away $ARG2
+per:city_of_death $ARG1 died * in $ARG2
+per:city_of_death $ARG1 , who died * in $ARG2
+per:city_of_death $ARG1 died in the city of $ARG2
+per:city_of_death $ARG1 died * in the city of $ARG2
+per:city_of_death $ARG1 , who died the city of * in $ARG2
+per:city_of_death $ARG1 died in the town of $ARG2
+per:city_of_death $ARG1 died * in the town of $ARG2
+per:city_of_death $ARG1 , who died the town of * in $ARG2
+
+per:cause_of_death $ARG1 died of $ARG2
+per:cause_of_death $ARG1 died from $ARG2
+per:cause_of_death $ARG1 died in a $ARG2
+per:cause_of_death $ARG1 died in an $ARG2
+per:cause_of_death $ARG1 died because $ARG2
+per:cause_of_death $ARG1 passed away of $ARG2
+per:cause_of_death $ARG1 succumbed to $ARG2
+per:cause_of_death $ARG1 was diagnosed with $ARG2 and died
+per:cause_of_death $ARG1 committed suicide with $ARG2
+per:cause_of_death $ARG1 committed suicide by $ARG2
+per:cause_of_death $ARG1 was killed with $ARG2
+per:cause_of_death $ARG1 was killed by $ARG2
+per:cause_of_death $ARG1 was killed in a $ARG2
+per:cause_of_death $ARG1 was killed in an $ARG2
+# For the following , ARG2 already equals to the context.
+# TODO: make it possible to express this in the pattern.
+#per:cause_of_death $ARG1 commited suicide
+#per:cause_of_death $ARG1 was shot
+#per:cause_of_death $ARG1 was killed
+#per:cause_of_death $ARG1 was assassinated
+
+# TODO: include frequent 'born-in' patterns
+per:countries_of_residence $ARG1 grew up in $ARG2
+per:countries_of_residence $ARG1 grew up in * , $ARG2
+per:countries_of_residence $ARG1 lives in $ARG2
+per:countries_of_residence $ARG1 lived in $ARG2
+per:countries_of_residence $ARG1 lives in * , $ARG2
+per:countries_of_residence $ARG1 lived in * , $ARG2
+per:countries_of_residence $ARG1 moves to $ARG2
+per:countries_of_residence $ARG1 moved to $ARG2
+per:countries_of_residence $ARG1 moves to * , $ARG2
+per:countries_of_residence $ARG1 moved to * , $ARG2
+per:countries_of_residence $ARG1 was raised in $ARG2
+per:countries_of_residence $ARG1 has been living in $ARG2
+per:countries_of_residence $ARG1 resides in $ARG2
+per:countries_of_residence $ARG1 resided in $ARG2
+per:countries_of_residence $ARG1 's house in $ARG2
+per:countries_of_residence $ARG1 's home in $ARG2
+per:countries_of_residence $ARG1 has a house in $ARG2
+per:countries_of_residence $ARG1 immigrated to $ARG2
+per:countries_of_residence $ARG1 spent his childhood in $ARG2
+per:countries_of_residence $ARG1 , born in $ARG2
+per:countries_of_residence $ARG1 was born in $ARG2
+
+per:statesorprovinces_of_residence $ARG1 grew up in $ARG2
+per:statesorprovinces_of_residence $ARG1 grew up in * , $ARG2
+per:statesorprovinces_of_residence $ARG1 was raised in $ARG2
+per:statesorprovinces_of_residence $ARG1 lives in $ARG2
+per:statesorprovinces_of_residence $ARG1 lives in * , $ARG2
+per:statesorprovinces_of_residence $ARG1 lived in $ARG2
+per:statesorprovinces_of_residence $ARG1 lived in * , $ARG2
+per:statesorprovinces_of_residence $ARG1 moved to $ARG2
+per:statesorprovinces_of_residence $ARG1 moved to * , $ARG2
+per:statesorprovinces_of_residence $ARG1 moves to $ARG2
+per:statesorprovinces_of_residence $ARG1 moves to * , $ARG2
+per:statesorprovinces_of_residence $ARG1 has been living in $ARG2
+per:statesorprovinces_of_residence $ARG1 resides in $ARG2
+per:statesorprovinces_of_residence $ARG1 resided in $ARG2
+per:statesorprovinces_of_residence $ARG1 's house in $ARG2
+per:statesorprovinces_of_residence $ARG1 's home in $ARG2
+per:statesorprovinces_of_residence $ARG1 has a house in $ARG2
+per:statesorprovinces_of_residence $ARG1 spent his childhood in $ARG2
+per:statesorprovinces_of_residence $ARG1 lives in the province of $ARG2
+per:statesorprovinces_of_residence $ARG1 moved to the province of $ARG2
+per:statesorprovinces_of_residence $ARG1 lives in the state of $ARG2
+per:statesorprovinces_of_residence $ARG1 moved to the state of $ARG2
+per:statesorprovinces_of_residence $ARG1 , born in $ARG2
+per:statesorprovinces_of_residence $ARG1 was born in $ARG2
+
+per:cities_of_residence $ARG1 grew up in $ARG2
+per:cities_of_residence $ARG1 was raised in $ARG2
+per:cities_of_residence $ARG1 lives in $ARG2
+per:cities_of_residence $ARG1 lived in $ARG2
+per:cities_of_residence $ARG1 has been living in $ARG2
+per:cities_of_residence $ARG1 resides in $ARG2
+per:cities_of_residence $ARG1 resided in $ARG2
+per:cities_of_residence $ARG1 's house in $ARG2
+per:cities_of_residence $ARG1 's home in $ARG2
+per:cities_of_residence $ARG1 's hometown $ARG2
+per:cities_of_residence $ARG1 's hometown , $ARG2
+per:cities_of_residence $ARG1 has a house in $ARG2
+per:cities_of_residence $ARG1 moved to $ARG2
+per:cities_of_residence $ARG1 moves to $ARG2
+per:cities_of_residence $ARG1 spent his childhood in $ARG2
+per:cities_of_residence $ARG1 lives in the city of $ARG2
+per:cities_of_residence $ARG1 moved to the city of $ARG2
+per:cities_of_residence $ARG1 lives in the town of $ARG2
+per:cities_of_residence $ARG1 moved to the town of $ARG2
+per:cities_of_residence $ARG1 , born in $ARG2
+per:cities_of_residence $ARG1 was born in $ARG2
+per:cities_of_residence $ARG2 citizen $ARG1
+per:cities_of_residence $ARG2 , home of $ARG1
+per:cities_of_residence $ARG2 , hometown of $ARG1
+per:cities_of_residence $ARG2 is the hometown of $ARG1
+per:cities_of_residence $ARG2 citizen , $ARG1
+per:cities_of_residence $ARG1 is a $ARG2 citizen
+per:cities_of_residence $ARG1 is an $ARG2 citizen
+per:cities_of_residence $ARG1, a $ARG2 citizen
+per:cities_of_residence $ARG1, an $ARG2 citizen
+
+per:schools_attended $ARG1 graduated from $ARG2
+per:schools_attended $ARG1 graduated in * from $ARG2
+per:schools_attended $ARG1 attended * at $ARG2
+per:schools_attended $ARG1 attended $ARG2
+per:schools_attended $ARG1 earned his * at $ARG2
+per:schools_attended $ARG1 holds a * from $ARG2
+per:schools_attended $ARG1 holds a * in * from $ARG2
+per:schools_attended $ARG1 , who holds a * in * from $ARG2
+per:schools_attended $ARG1 , who holds a * from $ARG2
+per:schools_attended $ARG1 has a * from $ARG2
+per:schools_attended $ARG1 has a * in * from $ARG2
+per:schools_attended $ARG1 , who has a * in * from $ARG2
+per:schools_attended $ARG1 , who has a * from $ARG2
+# This should match the sentence:
+#Erraguntla , who has a masters degree in computer engineering from the University of Lousiana
+per:schools_attended $ARG1 studied at $ARG2
+per:schools_attended $ARG1 is a student at $ARG2
+per:schools_attended $ARG1 was a student at $ARG2
+per:schools_attended $ARG1 is a $ARG2 student
+per:schools_attended $ARG1, a $ARG2 student
+per:schools_attended $ARG1 is an $ARG2 student
+per:schools_attended $ARG1, an $ARG2 student
+per:schools_attended $ARG1 is a $ARG2 graduate
+per:schools_attended $ARG1, a $ARG2 graduate
+per:schools_attended $ARG1 is an $ARG2 graduate
+per:schools_attended $ARG1, an $ARG2 graduate
+per:schools_attended $ARG1 is a $ARG2 alumnus
+per:schools_attended $ARG1, a $ARG2 alumnus
+per:schools_attended $ARG1 is an $ARG2 alumnus
+per:schools_attended $ARG1, an $ARG2 alumnus
+per:schools_attended $ARG2 gradute $ARG1
+per:schools_attended $ARG2 student $ARG1
+per:schools_attended $ARG2 alumnus $ARG1
+
+
+per:title $ARG1 was appointed $ARG2
+per:title $ARG1 was nominated $ARG2
+per:title $ARG1 was elected as $ARG2
+per:title $ARG1 , a $ARG2
+per:title $ARG1 , an $ARG2
+#per:title $ARG1 , the $ARG2
+per:title $ARG1 , a former $ARG2
+per:title $ARG1 , an a former $ARG2
+per:title $ARG1 is a $ARG2
+per:title $ARG1 is an $ARG2
+#per:title $ARG1 is the $ARG2
+per:title $ARG2 works as a $ARG1
+per:title $ARG2 works as an $ARG1
+per:title $ARG1 was a $ARG2
+per:title $ARG1 was an $ARG2
+per:title $ARG2 worked as a $ARG1
+per:title $ARG2 worked as an $ARG1
+# TODO: high-recall vs. high-precision patterns
+per:title $ARG2 $ARG1
+
+per:member_of $ARG1 is a member of $ARG2
+per:member_of $ARG2 member $ARG1
+per:member_of $ARG1 is a fellow of $ARG2
+per:member_of $ARG2 fellow $ARG1
+per:member_of $ARG1 became a member of $ARG2
+per:member_of $ARG1 became $ARG2 member
+per:member_of $ARG1 became a fellow of $ARG2
+per:member_of $ARG1 became $ARG2 fellow
+per:member_of $ARG1 joined $ARG2
+per:member_of $ARG1 is leaving $ARG2
+per:member_of $ARG1 left $ARG2
+
+per:employee_of $ARG1 worked for $ARG2
+per:employee_of $ARG1 works for $ARG2
+per:employee_of $ARG1 has been working for $ARG2
+per:employee_of $ARG1 was working for $ARG2
+per:employee_of $ARG1 had working for $ARG2
+per:employee_of $ARG1 was employed by $ARG2
+per:employee_of $ARG1 is employed by $ARG2
+per:employee_of $ARG1 , an $ARG2 employee
+per:employee_of $ARG1 , a $ARG2 employee
+per:employee_of $ARG1 was hired by $ARG2
+per:employee_of $ARG1 has been hired by $ARG2
+per:employee_of $ARG1 had been hired by $ARG2
+per:employee_of $ARG2 manager $ARG1
+per:employee_of $ARG2 is a manager of $ARG1
+per:employee_of $ARG2 coach $ARG1
+per:employee_of $ARG2 is the coach of $ARG1
+per:employee_of $ARG1 joined $ARG2
+per:employee_of $ARG1 is leaving $ARG2
+per:employee_of $ARG1 left $ARG2
+per:employee_of $ARG1 served $ARG2
+
+per:employee_or_member_of $ARG1 is a member of $ARG2
+per:employee_or_member_of $ARG2 member $ARG1
+per:employee_or_member_of $ARG1 is a fellow of $ARG2
+per:employee_or_member_of $ARG2 fellow $ARG1
+per:employee_or_member_of $ARG1 became a member of $ARG2
+per:employee_or_member_of $ARG1 became $ARG2 member
+per:employee_or_member_of $ARG1 became a fellow of $ARG2
+per:employee_or_member_of $ARG1 became $ARG2 fellow
+per:employee_or_member_of $ARG1 joined $ARG2
+per:employee_or_member_of $ARG1 is leaving $ARG2
+per:employee_or_member_of $ARG1 left $ARG2
+per:employee_or_member_of $ARG1 worked for $ARG2
+per:employee_or_member_of $ARG1 works for $ARG2
+per:employee_or_member_of $ARG1 has been working for $ARG2
+per:employee_or_member_of $ARG1 was working for $ARG2
+per:employee_or_member_of $ARG1 had working for $ARG2
+per:employee_or_member_of $ARG1 was employed by $ARG2
+per:employee_or_member_of $ARG1 is employed by $ARG2
+per:employee_or_member_of $ARG1 , an $ARG2 employee
+per:employee_or_member_of $ARG1 , a $ARG2 employee
+per:employee_or_member_of $ARG1 was hired by $ARG2
+per:employee_or_member_of $ARG1 has been hired by $ARG2
+per:employee_or_member_of $ARG1 had been hired by $ARG2
+per:employee_or_member_of $ARG2 manager $ARG1
+per:employee_or_member_of $ARG2 is a manager of $ARG1
+per:employee_or_member_of $ARG2 coach $ARG1
+per:employee_or_member_of $ARG2 is the coach of $ARG1
+per:employee_or_member_of $ARG1 joined $ARG2
+per:employee_or_member_of $ARG1 is leaving $ARG2
+per:employee_or_member_of $ARG1 left $ARG2
+per:employee_or_member_of $ARG1 served $ARG2
+
+per:religion $ARG1 is $ARG2
+per:religion $ARG1 is a $ARG2
+per:religion $ARG1 is an $ARG2
+per:religion $ARG1 is a believing $ARG2
+per:religion $ARG1 was $ARG2
+per:religion $ARG1 was a $ARG2
+per:religion $ARG1 was an $ARG2
+per:religion $ARG1 was a believing $ARG2
+per:religion $ARG1 , $ARG2
+per:religion $ARG1 , a $ARG2
+per:religion $ARG1 , an $ARG2
+per:religion $ARG1 , a believing $ARG2
+per:religion $ARG1 converted to $ARG2
+
+per:spouse $ARG0 and $ARG0 are married
+per:spouse $ARG0 is married to $ARG0
+per:spouse $ARG0 is the wife of $ARG0
+per:spouse $ARG0 's wife , $ARG0
+per:spouse $ARG0' wife , $ARG0
+per:spouse $ARG0 , $ARG0 's wife
+per:spouse $ARG0 , $ARG0' wife
+per:spouse $ARG0 , the wife of $ARG0
+per:spouse $ARG0 and his wife $ARG0
+per:spouse $ARG0 is the husband of $ARG0
+per:spouse $ARG0 's husband , $ARG0
+per:spouse $ARG0' husband , $ARG0
+per:spouse $ARG0 , $ARG0 's husband
+per:spouse $ARG0 , $ARG0' husband
+per:spouse $ARG0 , the husband of $ARG0
+per:spouse $ARG0 and her husband $ARG0
+
+per:children $ARG1 's child $ARG2
+per:children $ARG1 ' child $ARG2
+per:children $ARG2 is the child of $ARG1
+per:children $ARG1 has a child named $ARG2
+per:children $ARG1 's oldest child $ARG2
+per:children $ARG1 ' oldest child $ARG2
+per:children $ARG2 is the oldest child of $ARG1
+per:children $ARG1 's youngest child $ARG2
+per:children $ARG1 ' youngest child $ARG2
+per:children $ARG2 is the youngest child of $ARG1
+per:children $ARG1 's daughter $ARG2
+per:children $ARG1 ' daughter $ARG2
+per:children $ARG2 is the daughter of $ARG1
+per:children $ARG1 has a doughter named $ARG2
+per:children $ARG1 's son $ARG2
+per:children $ARG1 ' son $ARG2
+per:children $ARG2 is the son of $ARG1
+per:children $ARG1 has a son named $ARG2
+per:children $ARG1 is the father of $ARG2
+per:children $ARG2 's father , $ARG1
+per:children $ARG2 ' father , $ARG1
+per:children $ARG2 's father $ARG1
+per:children $ARG2 ' father $ARG1
+per:children $ARG1 is the mother of $ARG2
+per:children $ARG2 's mother , $ARG1
+per:children $ARG2 ' mother , $ARG1
+per:children $ARG2 's mother $ARG1
+per:children $ARG2 ' mother $ARG1
+
+per:parents $ARG2 's child $ARG1
+per:parents $ARG2 ' child $ARG1
+per:parents $ARG1 is the child of $ARG2
+per:parents $ARG2 has a child named $ARG1
+per:parents $ARG2 's oldest child $ARG1
+per:parents $ARG2 ' oldest child $ARG1
+per:parents $ARG1 is the oldest child of $ARG2
+per:parents $ARG2 's youngest child $ARG1
+per:parents $ARG2 ' youngest child $ARG1
+per:parents $ARG1 is the youngest child of $ARG2
+per:parents $ARG2 's daughter $ARG1
+per:parents $ARG2 ' daughter $ARG1
+per:parents $ARG1 is the daughter of $ARG2
+per:parents $ARG2 has a doughter named $ARG1
+per:parents $ARG2 's son $ARG1
+per:parents $ARG2 ' son $ARG1
+per:parents $ARG1 is the son of $ARG2
+per:parents $ARG2 has a son named $ARG1
+per:parents $ARG2 is the father of $ARG1
+per:parents $ARG1 's father , $ARG2
+per:parents $ARG1 ' father , $ARG2
+per:parents $ARG1 's father $ARG2
+per:parents $ARG1 ' father $ARG2
+per:parents $ARG2 is the mother of $ARG1
+per:parents $ARG1 's mother , $ARG2
+per:parents $ARG1 ' mother , $ARG2
+per:parents $ARG1 's mother $ARG2
+per:parents $ARG1 ' mother $ARG2
+
+per:siblings $ARG0 is the brother of $ARG0
+per:siblings $ARG0 is a brother of $ARG0
+per:siblings $ARG0 's brother , $ARG0
+per:siblings $ARG0' brother , $ARG0
+per:siblings $ARG0 's brother $ARG0
+per:siblings $ARG0' brother $ARG0
+per:siblings $ARG0 is the younger brother of $ARG0
+per:siblings $ARG0 's younger brother , $ARG0
+per:siblings $ARG0' younger brother , $ARG0
+per:siblings $ARG0 is the older brother of $ARG0
+per:siblings $ARG0 's older brother , $ARG0
+per:siblings $ARG0' older brother , $ARG0
+per:siblings $ARG0 is the sister of $ARG0
+per:siblings $ARG0 is a sister of $ARG0
+per:siblings $ARG0 's sister $ARG0
+per:siblings $ARG0' sister $ARG0
+per:siblings $ARG0 's sister , $ARG0
+per:siblings $ARG0' sister , $ARG0
+per:siblings $ARG0 is the younger sister of $ARG0
+per:siblings $ARG0 's younger sister , $ARG0
+per:siblings $ARG0' younger sister , $ARG0
+per:siblings $ARG0 is the older sister of $ARG0
+per:siblings $ARG0 's older sister , $ARG0
+per:siblings $ARG0' older sister , $ARG0
+
+per:other_family $ARG0 's grandson $ARG0
+per:other_family $ARG0 's granddaughter $ARG0
+per:other_family $ARG0 's grandfather $ARG0
+per:other_family $ARG0 's grandmother $ARG0
+per:other_family $ARG0 's uncle $ARG0
+per:other_family $ARG0 's aunt $ARG0
+per:other_family $ARG0 's cousin $ARG0
+per:other_family $ARG0 's nephew $ARG0
+per:other_family $ARG0 's relative $ARG0
+per:other_family $ARG0 's grandson , $ARG0
+per:other_family $ARG0 's granddaughter , $ARG0
+per:other_family $ARG0 's grandfather , $ARG0
+per:other_family $ARG0 's grandmother , $ARG0
+per:other_family $ARG0 's uncle , $ARG0
+per:other_family $ARG0 's aunt , $ARG0
+per:other_family $ARG0 's cousin , $ARG0
+per:other_family $ARG0 's nephew , $ARG0
+per:other_family $ARG0 's relative , $ARG0
+per:other_family $ARG0 is a grandson of $ARG0
+per:other_family $ARG0 is the grandson of $ARG0
+per:other_family $ARG0 is a granddaughter of $ARG0
+per:other_family $ARG0 is the granddaughter of $ARG0
+per:other_family $ARG0 is the grandfather of $ARG0
+per:other_family $ARG0 is the grandmother of $ARG0
+per:other_family $ARG0 is the uncle of $ARG0
+per:other_family $ARG0 is the aunt of $ARG0
+per:other_family $ARG0 is the cousin of $ARG0
+per:other_family $ARG0 is a cousin of $ARG0
+per:other_family $ARG0 is the nephew of $ARG0
+per:other_family $ARG0 is a nephew of $ARG0
+per:other_family $ARG0 is a relative of $ARG0
+per:other_family $ARG0 is related to $ARG0
+
+per:charges $ARG1 accused of $ARG2
+per:charges $ARG1 convicted of $ARG2
+per:charges $ARG1 convicted for $ARG2
+per:charges $ARG1 acquitted of $ARG2
+per:charges $ARG1 sentenced to * for $ARG2
+per:charges $ARG1 is accused of $ARG2
+per:charges $ARG1 is convicted of $ARG2
+per:charges $ARG1 is convicted for $ARG2
+per:charges $ARG1 is acquitted of $ARG2
+per:charges $ARG1 is sentenced to * for $ARG2
+per:charges $ARG1 was accused of $ARG2
+per:charges $ARG1 was convicted of $ARG2
+per:charges $ARG1 was convicted for $ARG2
+per:charges $ARG1 was acquitted of $ARG2
+per:charges $ARG1 was sentenced to * for $ARG2
+per:charges $ARG1 has been accused of $ARG2
+per:charges $ARG1 has been convicted of $ARG2
+per:charges $ARG1 has been convicted for $ARG2
+per:charges $ARG1 has been acquitted of $ARG2
+per:charges $ARG1 has been sentenced to * for $ARG2
+
+org:alternate_names $ARG1 formerly known as $ARG2
+org:alternate_names $ARG1 aka $ARG2
+org:alternate_names $ARG1 a.k.a. $ARG2
+org:alternate_names $ARG1 is also known as $ARG2
+org:alternate_names $ARG1 is known as $ARG2
+org:alternate_names $ARG1 , also known as $ARG2
+org:alternate_names $ARG1 , better known as $ARG2
+org:alternate_names $ARG1 , best known as $ARG2
+org:alternate_names $ARG1 ( also known as $ARG2 )
+org:alternate_names $ARG1 ( better known as $ARG2 )
+org:alternate_names $ARG1 formerly known as `` $ARG2
+org:alternate_names $ARG1 aka `` $ARG2
+org:alternate_names $ARG1 a.k.a. `` $ARG2
+org:alternate_names $ARG1 is also known as `` $ARG2
+org:alternate_names $ARG1 is known as `` $ARG2
+org:alternate_names $ARG1 , also known as `` $ARG2
+org:alternate_names $ARG1 , better known as `` $ARG2
+org:alternate_names $ARG1 , best known as `` $ARG2
+org:alternate_names $ARG1 ( also known as `` $ARG2 '' )
+org:alternate_names $ARG1 ( better known as `` $ARG2 '' )
+
+org:political_religious_affiliation $ARG1 is affiliated with $ARG2
+org:political_religious_affiliation $ARG1 , affiliated with $ARG2
+org:political_religious_affiliation $ARG1 is connected to $ARG2
+org:political_religious_affiliation $ARG1 , connected to $ARG2
+org:political_religious_affiliation $ARG1 is strongly connected to $ARG2
+org:political_religious_affiliation $ARG1 , strongly connected to $ARG2
+org:political_religious_affiliation $ARG1 is tightly connected to $ARG2
+org:political_religious_affiliation $ARG1 , tightly connected to $ARG2
+org:political_religious_affiliation $ARG1 is a $ARG2 organization
+org:political_religious_affiliation $ARG1 is an $ARG2 organization
+org:political_religious_affiliation $ARG1 is a $ARG2 group
+org:political_religious_affiliation $ARG1 is an $ARG2 group
+org:political_religious_affiliation $ARG1 as a $ARG2 organization
+org:political_religious_affiliation $ARG1 as an $ARG2 organization
+org:political_religious_affiliation $ARG1 as a $ARG2 group
+org:political_religious_affiliation $ARG1 as an $ARG2 group
+org:political_religious_affiliation $ARG1 , a $ARG2 organization
+org:political_religious_affiliation $ARG1 , an $ARG2 organization
+org:political_religious_affiliation $ARG1 , a $ARG2 group
+org:political_religious_affiliation $ARG1 , an $ARG2 group
+org:political_religious_affiliation $ARG1 and other $ARG2 organizations
+org:political_religious_affiliation $ARG1 and other $ARG2 groups
+org:political_religious_affiliation $ARG1 is an affiliate of $ARG2
+
+# TODO: Uppercae/lowercase would matter most here.
+org:top_members_employees $ARG2 leads $ARG1
+org:top_members_employees $ARG2 commands $ARG1
+org:top_members_employees $ARG2 oversees $ARG1
+org:top_members_employees $ARG2 commanded $ARG1
+org:top_members_employees $ARG1 board member $ARG2
+org:top_members_employees $ARG1 CFO $ARG2
+org:top_members_employees $ARG1 CEO $ARG2
+org:top_members_employees $ARG1 chief executive officer $ARG2
+org:top_members_employees $ARG1 managing director $ARG2
+org:top_members_employees $ARG1 MD $ARG2
+org:top_members_employees $ARG1 executive director $ARG2
+org:top_members_employees $ARG1 ED $ARG2
+org:top_members_employees $ARG1 president $ARG2
+org:top_members_employees $ARG1 vice president $ARG2
+org:top_members_employees $ARG1 director $ARG2
+org:top_members_employees $ARG1 chairman $ARG2
+org:top_members_employees $ARG1 executive vice president $ARG2
+org:top_members_employees $ARG1 provost $ARG2
+org:top_members_employees $ARG1 dean $ARG2
+org:top_members_employees $ARG2 is a board member of $ARG1
+org:top_members_employees $ARG2 is the CFO of $ARG1
+org:top_members_employees $ARG2 is the CEO of $ARG1
+org:top_members_employees $ARG2 is the president of $ARG1
+org:top_members_employees $ARG2 is the vice president of $ARG1
+org:top_members_employees $ARG2 is the director of $ARG1
+org:top_members_employees $ARG2 is the chairman of $ARG1
+org:top_members_employees $ARG2 is the executive vice president of $ARG1
+org:top_members_employees $ARG2 is the provost of $ARG1
+org:top_members_employees $ARG2 is the dean of $ARG1
+org:top_members_employees $ARG2 , board member of $ARG1
+org:top_members_employees $ARG2 , CFO of $ARG1
+org:top_members_employees $ARG2 , CEO of $ARG1
+org:top_members_employees $ARG2 , president of $ARG1
+org:top_members_employees $ARG2 , vice president of $ARG1
+org:top_members_employees $ARG2 , director of $ARG1
+org:top_members_employees $ARG2 , chairman of $ARG1
+org:top_members_employees $ARG2 , executive vice president of $ARG1
+org:top_members_employees $ARG2 , provost of $ARG1
+org:top_members_employees $ARG2 , dean of $ARG1
+org:top_members_employees $ARG2 , a board member of $ARG1
+org:top_members_employees $ARG2 , the CFO of $ARG1
+org:top_members_employees $ARG2 , the CEO of $ARG1
+org:top_members_employees $ARG2 , the president of $ARG1
+org:top_members_employees $ARG2 , the vice president of $ARG1
+org:top_members_employees $ARG2 , the director of $ARG1
+org:top_members_employees $ARG2 , the chairman of $ARG1
+org:top_members_employees $ARG2 , the executive vice president of $ARG1
+org:top_members_employees $ARG2 , the provost of $ARG1
+org:top_members_employees $ARG2 , the dean of $ARG1
+org:top_members_employees $ARG2 , former board member of $ARG1
+org:top_members_employees $ARG2 , former CFO of $ARG1
+org:top_members_employees $ARG2 , former CEO of $ARG1
+org:top_members_employees $ARG2 , former president of $ARG1
+org:top_members_employees $ARG2 , former vice president of $ARG1
+org:top_members_employees $ARG2 , former director of $ARG1
+org:top_members_employees $ARG2 , former chairman of $ARG1
+org:top_members_employees $ARG2 , former executive vice president of $ARG1
+org:top_members_employees $ARG2 , former provost of $ARG1
+org:top_members_employees $ARG2 , former dean of $ARG1
+
+org:number_of_employees_members $ARG1 has $ARG2 members
+org:number_of_employees_members $ARG1 had $ARG2 members
+org:number_of_employees_members $ARG1 counted $ARG2 members
+org:number_of_employees_members $ARG1 counts $ARG2 members
+org:number_of_employees_members with $ARG2 members , $ARG1
+org:number_of_employees_members having $ARG2 members , $ARG1
+org:number_of_employees_members $ARG1 has around $ARG2 members
+org:number_of_employees_members $ARG1 has nearly $ARG2 members
+org:number_of_employees_members $ARG1 has approximately $ARG2 members
+org:number_of_employees_members $ARG1 has exactly $ARG2 members
+org:number_of_employees_members $ARG1 has $ARG2 employees
+org:number_of_employees_members $ARG1 has around $ARG2 employees
+org:number_of_employees_members $ARG1 has nearly $ARG2 employees
+org:number_of_employees_members $ARG1 has approximately $ARG2 employees
+org:number_of_employees_members all $ARG2 employees of $ARG1
+org:number_of_employees_members all $ARG2 members of $ARG1
+org:number_of_employees_members all $ARG2 $ARG1 employees
+org:number_of_employees_members all $ARG2 $ARG1 members
+org:number_of_employees_members $ARG1 is employer of $ARG2 people
+org:number_of_employees_members $ARG1 employer of $ARG2 people
+org:number_of_employees_members $ARG1 employs $ARG2 people
+org:number_of_employees_members $ARG1 employed $ARG2 people
+org:number_of_employees_members employing $ARG2 people, $ARG1
+org:number_of_employees_members $ARG1 employs around $ARG2 people
+org:number_of_employees_members $ARG1 employs nearly $ARG2 people
+org:number_of_employees_members $ARG1 employs approximately $ARG2 people
+org:number_of_employees_members there are $ARG2 employees of $ARG1
+org:number_of_employees_members there are $ARG2 members of $ARG1
+
+org:members $ARG2 is a member organization of $ARG1
+org:members $ARG2 as a member organization of $ARG1
+org:members $ARG2 , as a member organization of $ARG1
+org:members $ARG2 , a member organization of $ARG1
+org:members $ARG2 is a member of $ARG1
+org:members $ARG2 are member of $ARG1
+org:members $ARG2 as a member of $ARG1
+org:members $ARG2 , as a member of $ARG1
+org:members $ARG2 , a member of $ARG1
+org:members $ARG2 is part of $ARG1
+org:members $ARG2 are part of $ARG1
+org:members $ARG2 plays in $ARG1
+org:members $ARG2 play in $ARG1
+org:members $ARG2 is relegated to $ARG1
+org:members $ARG2 are relegated to $ARG1
+org:members $ARG2 is promoted to $ARG1
+org:members $ARG2 are promoted to $ARG1
+org:members $ARG2 joined $ARG1
+org:members $ARG2 and other members of $ARG1
+
+org:member_of $ARG1 is a member organization of $ARG2
+org:member_of $ARG1 as a member organization of $ARG2
+org:member_of $ARG1 , as a member organization of $ARG2
+org:member_of $ARG1 , a member organization of $ARG2
+org:member_of $ARG1 is a member of $ARG2
+org:member_of $ARG1 are member of $ARG2
+org:member_of $ARG1 as a member of $ARG2
+org:member_of $ARG1 , as a member of $ARG2
+org:member_of $ARG1 , a member of $ARG2
+org:member_of $ARG1 is part of $ARG2
+org:member_of $ARG1 are part of $ARG2
+org:member_of $ARG1 plays in $ARG2
+org:member_of $ARG1 play in $ARG2
+org:member_of $ARG1 is relegated to $ARG2
+org:member_of $ARG1 are relegated to $ARG2
+org:member_of $ARG1 is promoted to $ARG2
+org:member_of $ARG1 are promoted to $ARG2
+org:member_of $ARG1 joined $ARG2
+org:member_of $ARG1 and other members of $ARG2
+
+org:subsidiaries $ARG2 , a subsidiary of $ARG1
+org:subsidiaries $ARG2 is a subsidiary of $ARG1
+org:subsidiaries $ARG2 as a subsidiary of $ARG1
+org:subsidiaries $ARG2 operates as a subsidiary of $ARG1
+org:subsidiaries $ARG2 , a branch of $ARG1
+org:subsidiaries $ARG2 is a branch of $ARG1
+org:subsidiaries $ARG2 as a branch of $ARG1
+org:subsidiaries $ARG2 , a regional branch of $ARG1
+org:subsidiaries $ARG2 is a regional branch of $ARG1
+org:subsidiaries $ARG2 as a regional branch of $ARG1
+org:subsidiaries $ARG2 , owned by $ARG1
+org:subsidiaries $ARG2 is owned by $ARG1
+org:subsidiaries $ARG1 owns $ARG2
+org:subsidiaries $ARG1 owned $ARG2
+org:subsidiaries $ARG2 belongs to $ARG1
+org:subsidiaries $ARG2 , belonging to $ARG1
+org:subsidiaries $ARG1 's $ARG2 subsidiary
+# Too low precision.
+#org:subsidiaries $ARG1 's $ARG2
+#org:subsidiaries $ARG2 of $ARG1
+org:subsidiaries $ARG1 's subsidiary $ARG2
+org:subsidiaries $ARG1 's unit $ARG2
+org:subsidiaries $ARG1 's arm $ARG2
+org:subsidiaries $ARG1 's * subsidiary $ARG2
+org:subsidiaries $ARG1 's * branch $ARG2
+org:subsidiaries $ARG1 's * unit $ARG2
+org:subsidiaries $ARG1 's * arm $ARG2
+org:subsidiaries $ARG2 subsidiary of $ARG1
+org:subsidiaries $ARG2 is the * arm of $ARG1
+org:subsidiaries $ARG2 is the * unit of $ARG1
+org:subsidiaries $ARG2 is the * branch of $ARG1
+org:subsidiaries $ARG2 is the * subsidiary of $ARG1
+
+org:parents $ARG1 , a subsidiary of $ARG2
+org:parents $ARG1 is a subsidiary of $ARG2
+org:parents $ARG1 as a subsidiary of $ARG2
+org:parents $ARG1 operates as a subsidiary of $ARG2
+org:parents $ARG1 , a branch of $ARG2
+org:parents $ARG1 is a branch of $ARG2
+org:parents $ARG1 as a branch of $ARG2
+org:parents $ARG1 , a regional branch of $ARG2
+org:parents $ARG1 is a regional branch of $ARG2
+org:parents $ARG1 as a regional branch of $ARG2
+org:parents $ARG1 , owned by $ARG2
+org:parents $ARG1 is owned by $ARG2
+org:parents $ARG2 owns $ARG1
+org:parents $ARG2 owned $ARG1
+org:parents $ARG1 belongs to $ARG2
+org:parents $ARG1 , belonging to $ARG2
+org:parents $ARG2 's $ARG1 subsidiary
+org:parents $ARG2 's subsidiary $ARG1
+org:parents $ARG2 's unit $ARG1
+org:parents $ARG2 's arm $ARG1
+org:parents $ARG2 's * subsidiary $ARG1
+org:parents $ARG2 's * branch $ARG1
+org:parents $ARG2 's * unit $ARG1
+org:parents $ARG2 's * arm $ARG1
+org:parents $ARG1 subsidiary of $ARG2
+org:parents $ARG1 is the * arm of $ARG2
+org:parents $ARG1 is the * unit of $ARG2
+org:parents $ARG1 is the * branch of $ARG2
+org:parents $ARG1 is the * subsidiary of $ARG2
+
+org:founded_by $ARG1 was founded by $ARG2
+org:founded_by $ARG1 , founded by $ARG2
+org:founded_by $ARG2 founded $ARG1
+org:founded_by $ARG2 , who founded $ARG1
+org:founded_by $ARG2 , the founder $ARG1
+org:founded_by $ARG1 was formed by $ARG2
+org:founded_by $ARG1 , formed by $ARG2
+org:founded_by $ARG2 formed $ARG1
+org:founded_by $ARG2 , who formed $ARG1
+org:founded_by $ARG1 was established by $ARG2
+org:founded_by $ARG1 , established by $ARG2
+org:founded_by $ARG2 established $ARG1
+org:founded_by $ARG2 , who established $ARG1
+
+# For dates: 'in'/'on' should be part of date argument.
+org:date_founded $ARG1 was founded $ARG2
+org:date_founded $ARG1 , founded $ARG2
+org:date_founded $ARG1 was incorporated $ARG2
+org:date_founded $ARG1 , incorporated $ARG2
+org:date_founded $ARG1 was established $ARG2
+org:date_founded $ARG1 , established $ARG2
+org:date_founded founded $ARG1 $ARG2
+org:date_founded established $ARG1 $ARG2
+org:date_founded formed $ARG1 $ARG2
+
+org:date_dissolved $ARG1 ceased to exist ARG2
+org:date_dissolved $ARG1 was dissolved $ARG2
+org:date_dissolved $ARG1 was * dissolved $ARG2
+org:date_dissolved $ARG1 was dissolved * $ARG2
+org:date_dissolved $ARG1 was wound up $ARG2
+org:date_dissolved $ARG1 was * wound up $ARG2
+org:date_dissolved $ARG1 was wound up * $ARG2
+org:date_dissolved $ARG1 was liquidated $ARG2
+org:date_dissolved $ARG1 was * liquidated $ARG2
+org:date_dissolved $ARG1 was liquidated * $ARG2
+org:date_dissolved $ARG1 was disbanded $ARG2
+org:date_dissolved $ARG1 was * disbanded $ARG2
+org:date_dissolved $ARG1 was disbanded * $ARG2
+org:date_dissolved $ARG2 $ARG1 was dissolved
+org:date_dissolved $ARG2 $ARG1 was wound up
+org:date_dissolved $ARG2 $ARG1 ceased to exist
+org:date_dissolved $ARG2 $ARG1 was liquidated
+org:date_dissolved $ARG2 $ARG1 was disbanded
+org:date_dissolved $ARG2 $ARG1 was * dissolved
+org:date_dissolved $ARG2 $ARG1 was * wound up
+org:date_dissolved $ARG2 $ARG1 was * liquidated
+org:date_dissolved $ARG2 $ARG1 was * disbanded
+org:date_dissolved $ARG2 , $ARG1 ceased to exist
+org:date_dissolved $ARG2 , $ARG1 was dissolved
+org:date_dissolved $ARG2 , $ARG1 was wound up
+org:date_dissolved $ARG2 , $ARG1 was liquidated
+org:date_dissolved $ARG2 , $ARG1 was disbanded
+org:date_dissolved $ARG2 , $ARG1 was * dissolved
+org:date_dissolved $ARG2 , $ARG1 was * wound up
+org:date_dissolved $ARG2 , $ARG1 was * liquidated
+org:date_dissolved $ARG2 , $ARG1 was * disbanded
+org:date_dissolved $ARG2 when $ARG1 was dissolved
+org:date_dissolved $ARG2 when $ARG1 was wound up
+org:date_dissolved $ARG2 when $ARG1 ceased to exist
+org:date_dissolved $ARG2 when $ARG1 was liquidated
+org:date_dissolved $ARG2 when $ARG1 was disbanded
+org:date_dissolved $ARG2 when $ARG1 was * dissolved
+org:date_dissolved $ARG2 when $ARG1 was * wound up
+org:date_dissolved $ARG2 when $ARG1 was * liquidated
+org:date_dissolved $ARG2 when $ARG1 was * disbanded
+org:date_dissolved $ARG1 , dissolved $ARG2
+org:date_dissolved $ARG1 , officially dissolved $ARG2
+org:date_dissolved $ARG1 , disbanded $ARG2
+org:date_dissolved $ARG1 , officially disbanded $ARG2
+org:date_dissolved $ARG1 , liquidated $ARG2
+org:date_dissolved $ARG1 , wound up $ARG2
+org:date_dissolved $ARG1 , officially liquidated $ARG2
+org:date_dissolved $ARG1 existed until $ARG2
+org:date_dissolved $ARG1 's liquidation $ARG2
+org:date_dissolved $ARG1 's dissolution $ARG2
+org:date_dissolved $ARG1 's end $ARG2
+
+org:country_of_headquarters $ARG1 's main complex in $ARG2
+org:country_of_headquarters $ARG1 's main campus in $ARG2
+org:country_of_headquarters $ARG1 's head office in $ARG2
+org:country_of_headquarters $ARG1 's main office in $ARG2
+org:country_of_headquarters $ARG1 's main offices in $ARG2
+org:country_of_headquarters $ARG1 's headquarters in $ARG2
+org:country_of_headquarters $ARG1 's main complex is in $ARG2
+org:country_of_headquarters $ARG1 's main campus is in $ARG2
+org:country_of_headquarters $ARG1 's head office is in $ARG2
+org:country_of_headquarters $ARG1 's main office is in $ARG2
+org:country_of_headquarters $ARG1 's main offices are in $ARG2
+org:country_of_headquarters $ARG1 's headquarters are in $ARG2
+org:country_of_headquarters main complex of $ARG1 is in $ARG2
+org:country_of_headquarters main campus of $ARG1 is in $ARG2
+org:country_of_headquarters head office of $ARG1 is in $ARG2
+org:country_of_headquarters main office of $ARG1 is in $ARG2
+org:country_of_headquarters main offices of $ARG1 are in $ARG2
+org:country_of_headquarters headquarters of $ARG1 are in $ARG2
+org:country_of_headquarters main complex of $ARG1 in $ARG2
+org:country_of_headquarters main campus of $ARG1 in $ARG2
+org:country_of_headquarters head office of $ARG1 in $ARG2
+org:country_of_headquarters main office of $ARG1 in $ARG2
+org:country_of_headquarters main offices of $ARG1 in $ARG2
+org:country_of_headquarters headquarters of $ARG1 in $ARG2
+org:country_of_headquarters $ARG1 is headquartered in $ARG2
+org:country_of_headquarters $ARG1 is based in $ARG2
+org:country_of_headquarters $ARG1 is located in $ARG2
+org:country_of_headquarters $ARG1 , headquartered in $ARG2
+org:country_of_headquarters $ARG1 , based in $ARG2
+org:country_of_headquarters $ARG1 , located in $ARG2
+org:country_of_headquarters $ARG2 main complex of $ARG1
+org:country_of_headquarters $ARG2 main campus of $ARG1
+org:country_of_headquarters $ARG2 head office of $ARG1
+org:country_of_headquarters $ARG2 main office of $ARG1
+org:country_of_headquarters $ARG2 main offices of $ARG1
+org:country_of_headquarters $ARG2 headquarters of $ARG1
+org:country_of_headquarters $ARG1 has its main campus in $ARG2
+org:country_of_headquarters $ARG1 has its head office in $ARG2
+org:country_of_headquarters $ARG1 has its main office in $ARG2
+org:country_of_headquarters $ARG1 has its main offices in $ARG2
+org:country_of_headquarters $ARG1 has its headquarters in $ARG2
+org:country_of_headquarters $ARG1 , a $ARG2-based
+org:country_of_headquarters $ARG1 , an $ARG2-based
+org:country_of_headquarters $ARG1 is a $ARG2-based
+org:country_of_headquarters $ARG1 is an $ARG2-based
+org:country_of_headquarters $ARG1 is a * based in $ARG2
+org:country_of_headquarters $ARG1 is based in * , $ARG2
+org:country_of_headquarters $ARG1 , based in * , $ARG2
+
+org:stateorprovince_of_headquarters $ARG1 's main complex in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's main campus in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's head office in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's main office in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's main offices in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's headquarters in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's main complex is in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's main campus is in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's head office is in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's main office is in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's main offices are in $ARG2
+org:stateorprovince_of_headquarters $ARG1 's headquarters are in $ARG2
+org:stateorprovince_of_headquarters main complex of $ARG1 is in $ARG2
+org:stateorprovince_of_headquarters main campus of $ARG1 is in $ARG2
+org:stateorprovince_of_headquarters head office of $ARG1 is in $ARG2
+org:stateorprovince_of_headquarters main office of $ARG1 is in $ARG2
+org:stateorprovince_of_headquarters main offices of $ARG1 are in $ARG2
+org:stateorprovince_of_headquarters headquarters of $ARG1 are in $ARG2
+org:stateorprovince_of_headquarters main complex of $ARG1 in $ARG2
+org:stateorprovince_of_headquarters main campus of $ARG1 in $ARG2
+org:stateorprovince_of_headquarters head office of $ARG1 in $ARG2
+org:stateorprovince_of_headquarters main office of $ARG1 in $ARG2
+org:stateorprovince_of_headquarters main offices of $ARG1 in $ARG2
+org:stateorprovince_of_headquarters headquarters of $ARG1 in $ARG2
+org:stateorprovince_of_headquarters $ARG1 is headquartered in $ARG2
+org:stateorprovince_of_headquarters $ARG1 is based in $ARG2
+org:stateorprovince_of_headquarters $ARG1 is located in $ARG2
+org:stateorprovince_of_headquarters $ARG1 , headquartered in $ARG2
+org:stateorprovince_of_headquarters $ARG1 , based in $ARG2
+org:stateorprovince_of_headquarters $ARG1 , located in $ARG2
+org:stateorprovince_of_headquarters $ARG2 main complex of $ARG1
+org:stateorprovince_of_headquarters $ARG2 main campus of $ARG1
+org:stateorprovince_of_headquarters $ARG2 head office of $ARG1
+org:stateorprovince_of_headquarters $ARG2 main office of $ARG1
+org:stateorprovince_of_headquarters $ARG2 main offices of $ARG1
+org:stateorprovince_of_headquarters $ARG2 headquarters of $ARG1
+org:stateorprovince_of_headquarters $ARG1 has its main campus in $ARG2
+org:stateorprovince_of_headquarters $ARG1 has its head office in $ARG2
+org:stateorprovince_of_headquarters $ARG1 has its main office in $ARG2
+org:stateorprovince_of_headquarters $ARG1 has its main offices in $ARG2
+org:stateorprovince_of_headquarters $ARG1 has its headquarters in $ARG2
+org:stateorprovince_of_headquarters $ARG1 , a $ARG2-based
+org:stateorprovince_of_headquarters $ARG1 , an $ARG2-based
+org:stateorprovince_of_headquarters $ARG1 is a $ARG2-based
+org:stateorprovince_of_headquarters $ARG1 is an $ARG2-based
+org:stateorprovince_of_headquarters $ARG1 is a * based in $ARG2
+org:stateorprovince_of_headquarters $ARG1 is based in * , $ARG2
+org:stateorprovince_of_headquarters $ARG1 , based in * , $ARG2
+org:stateorprovince_of_headquarters $ARG1 is based in the state of $ARG2
+org:stateorprovince_of_headquarters $ARG1 , based in the state of $ARG2
+org:stateorprovince_of_headquarters $ARG1 is based in the province of $ARG2
+org:stateorprovince_of_headquarters $ARG1 , based in the province of $ARG2
+
+org:city_of_headquarters $ARG1 's main complex in $ARG2
+org:city_of_headquarters $ARG1 's main campus in $ARG2
+org:city_of_headquarters $ARG1 's head office in $ARG2
+org:city_of_headquarters $ARG1 's main office in $ARG2
+org:city_of_headquarters $ARG1 's main offices in $ARG2
+org:city_of_headquarters $ARG1 's headquarters in $ARG2
+org:city_of_headquarters $ARG1 's main complex is in $ARG2
+org:city_of_headquarters $ARG1 's main campus is in $ARG2
+org:city_of_headquarters $ARG1 's head office is in $ARG2
+org:city_of_headquarters $ARG1 's main office is in $ARG2
+org:city_of_headquarters $ARG1 's main offices are in $ARG2
+org:city_of_headquarters $ARG1 's headquarters are in $ARG2
+org:city_of_headquarters main complex of $ARG1 is in $ARG2
+org:city_of_headquarters main campus of $ARG1 is in $ARG2
+org:city_of_headquarters head office of $ARG1 is in $ARG2
+org:city_of_headquarters main office of $ARG1 is in $ARG2
+org:city_of_headquarters main offices of $ARG1 are in $ARG2
+org:city_of_headquarters headquarters of $ARG1 are in $ARG2
+org:city_of_headquarters main complex of $ARG1 in $ARG2
+org:city_of_headquarters main campus of $ARG1 in $ARG2
+org:city_of_headquarters head office of $ARG1 in $ARG2
+org:city_of_headquarters main office of $ARG1 in $ARG2
+org:city_of_headquarters main offices of $ARG1 in $ARG2
+org:city_of_headquarters headquarters of $ARG1 in $ARG2
+org:city_of_headquarters $ARG1 is headquartered in $ARG2
+org:city_of_headquarters $ARG1 is based in $ARG2
+org:city_of_headquarters $ARG1 is located in $ARG2
+org:city_of_headquarters $ARG1 , headquartered in $ARG2
+org:city_of_headquarters $ARG1 , based in $ARG2
+org:city_of_headquarters $ARG1 , located in $ARG2
+org:city_of_headquarters $ARG2 main complex of $ARG1
+org:city_of_headquarters $ARG2 main campus of $ARG1
+org:city_of_headquarters $ARG2 head office of $ARG1
+org:city_of_headquarters $ARG2 main office of $ARG1
+org:city_of_headquarters $ARG2 main offices of $ARG1
+org:city_of_headquarters $ARG2 headquarters of $ARG1
+org:city_of_headquarters $ARG1 has its main campus in $ARG2
+org:city_of_headquarters $ARG1 has its head office in $ARG2
+org:city_of_headquarters $ARG1 has its main office in $ARG2
+org:city_of_headquarters $ARG1 has its main offices in $ARG2
+org:city_of_headquarters $ARG1 has its headquarters in $ARG2
+org:city_of_headquarters $ARG1 , a $ARG2-based
+org:city_of_headquarters $ARG1 , an $ARG2-based
+org:city_of_headquarters $ARG1 is a $ARG2-based
+org:city_of_headquarters $ARG1 is an $ARG2-based
+org:city_of_headquarters $ARG1 is a * based in $ARG2
+org:city_of_headquarters $ARG1 is based in the city of $ARG2
+org:city_of_headquarters $ARG1 , based in the city of $ARG2
+org:city_of_headquarters $ARG1 is based in the town of $ARG2
+org:city_of_headquarters $ARG1 , based in the town of $ARG2
+
+org:shareholders $ARG2 's stakes in $ARG1
+org:shareholders $ARG2 ' stakes in $ARG1
+org:shareholders $ARG2 's shares in $ARG1
+org:shareholders $ARG2 ' shares in $ARG1
+org:shareholders $ARG2 holds stakes in $ARG1
+org:shareholders $ARG2 holds shares in $ARG1
+org:shareholders $ARG2 holds * of the stakes in $ARG1
+org:shareholders $ARG2 holds * of the shares in $ARG1
+org:shareholders $ARG1 is owned by $ARG2
+org:shareholders $ARG1 owner $ARG2
+org:shareholders $ARG2 is owner of $ARG1
+org:shareholders $ARG2 is majority owner of $ARG1
+org:shareholders $ARG2 holds the majority in $ARG1
+
+org:website the $ARG1 website $ARG2
+org:website the $ARG1 website at $ARG2
+org:website the $ARG1 website: $ARG2
+org:website the $ARG1 website ( $ARG2 )
+org:website $ARG1 ( $ARG2 )
+
+# old relation names
+org:dissolved $ARG1 ceased to exist ARG2
+org:dissolved $ARG1 , disbanded $ARG2
+org:dissolved $ARG1 , dissolved $ARG2
+org:dissolved $ARG1 existed until $ARG2
+org:dissolved $ARG1 , liquidated $ARG2
+org:dissolved $ARG1 , officially disbanded $ARG2
+org:dissolved $ARG1 , officially dissolved $ARG2
+org:dissolved $ARG1 , officially liquidated $ARG2
+org:dissolved $ARG1 's dissolution $ARG2
+org:dissolved $ARG1 's end $ARG2
+org:dissolved $ARG1 's liquidation $ARG2
+org:dissolved $ARG1 was * disbanded $ARG2
+org:dissolved $ARG1 was disbanded $ARG2
+org:dissolved $ARG1 was disbanded * $ARG2
+org:dissolved $ARG1 was * dissolved $ARG2
+org:dissolved $ARG1 was dissolved $ARG2
+org:dissolved $ARG1 was dissolved * $ARG2
+org:dissolved $ARG1 was * liquidated $ARG2
+org:dissolved $ARG1 was liquidated $ARG2
+org:dissolved $ARG1 was liquidated * $ARG2
+org:dissolved $ARG1 was * wound up $ARG2
+org:dissolved $ARG1 was wound up $ARG2
+org:dissolved $ARG1 was wound up * $ARG2
+org:dissolved $ARG1 , wound up $ARG2
+org:dissolved $ARG2 , $ARG1 ceased to exist
+org:dissolved $ARG2 $ARG1 ceased to exist
+org:dissolved $ARG2 , $ARG1 was disbanded
+org:dissolved $ARG2 , $ARG1 was * disbanded
+org:dissolved $ARG2 $ARG1 was disbanded
+org:dissolved $ARG2 $ARG1 was * disbanded
+org:dissolved $ARG2 , $ARG1 was dissolved
+org:dissolved $ARG2 , $ARG1 was * dissolved
+org:dissolved $ARG2 $ARG1 was dissolved
+org:dissolved $ARG2 $ARG1 was * dissolved
+org:dissolved $ARG2 , $ARG1 was liquidated
+org:dissolved $ARG2 , $ARG1 was * liquidated
+org:dissolved $ARG2 $ARG1 was liquidated
+org:dissolved $ARG2 $ARG1 was * liquidated
+org:dissolved $ARG2 , $ARG1 was * wound up
+org:dissolved $ARG2 , $ARG1 was wound up
+org:dissolved $ARG2 $ARG1 was * wound up
+org:dissolved $ARG2 $ARG1 was wound up
+org:dissolved $ARG2 when $ARG1 ceased to exist
+org:dissolved $ARG2 when $ARG1 was disbanded
+org:dissolved $ARG2 when $ARG1 was * disbanded
+org:dissolved $ARG2 when $ARG1 was dissolved
+org:dissolved $ARG2 when $ARG1 was * dissolved
+org:dissolved $ARG2 when $ARG1 was liquidated
+org:dissolved $ARG2 when $ARG1 was * liquidated
+org:dissolved $ARG2 when $ARG1 was * wound up
+org:dissolved $ARG2 when $ARG1 was wound up
+org:founded $ARG1 , established $ARG2
+org:founded $ARG1 , founded $ARG2
+org:founded $ARG1 , incorporated $ARG2
+org:founded $ARG1 was established $ARG2
+org:founded $ARG1 was founded $ARG2
+org:founded $ARG1 was incorporated $ARG2
+org:founded established $ARG1 $ARG2
+org:founded formed $ARG1 $ARG2
+org:founded founded $ARG1 $ARG2
+per:stateorprovinces_of_residence $ARG1 , born in $ARG2
+per:stateorprovinces_of_residence $ARG1 grew up in $ARG2
+per:stateorprovinces_of_residence $ARG1 grew up in * , $ARG2
+per:stateorprovinces_of_residence $ARG1 has a house in $ARG2
+per:stateorprovinces_of_residence $ARG1 has been living in $ARG2
+per:stateorprovinces_of_residence $ARG1 lived in $ARG2
+per:stateorprovinces_of_residence $ARG1 lived in * , $ARG2
+per:stateorprovinces_of_residence $ARG1 lives in $ARG2
+per:stateorprovinces_of_residence $ARG1 lives in * , $ARG2
+per:stateorprovinces_of_residence $ARG1 lives in the province of $ARG2
+per:stateorprovinces_of_residence $ARG1 lives in the state of $ARG2
+per:stateorprovinces_of_residence $ARG1 moved to $ARG2
+per:stateorprovinces_of_residence $ARG1 moved to * , $ARG2
+per:stateorprovinces_of_residence $ARG1 moved to the province of $ARG2
+per:stateorprovinces_of_residence $ARG1 moved to the state of $ARG2
+per:stateorprovinces_of_residence $ARG1 moves to $ARG2
+per:stateorprovinces_of_residence $ARG1 moves to * , $ARG2
+per:stateorprovinces_of_residence $ARG1 resided in $ARG2
+per:stateorprovinces_of_residence $ARG1 resides in $ARG2
+per:stateorprovinces_of_residence $ARG1 's home in $ARG2
+per:stateorprovinces_of_residence $ARG1 's house in $ARG2
+per:stateorprovinces_of_residence $ARG1 spent his childhood in $ARG2
+per:stateorprovinces_of_residence $ARG1 was born in $ARG2
+per:stateorprovinces_of_residence $ARG1 was raised in $ARG2
+
+
+
