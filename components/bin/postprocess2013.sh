@@ -5,7 +5,7 @@ QUERYXML=$2
 ORG_MAP=$3
 OUTPUT=$4
 
-LINKSTAT=$TAC_ROOT/resources/expansion/enwiki.linktext.counts
+LINKSTAT=`$TAC_ROOT/bin/get_expand_config.sh wikilinks /dev/null`
 
 # Bring date into TIMEX2 format if possible.
 correct_date=`mktemp` 

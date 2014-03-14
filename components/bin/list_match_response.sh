@@ -2,7 +2,7 @@
 # Creates a response from matching a list of tuples against candidates.
 query_expanded=$1
 kb_slots=$2
-link_stats=$TAC_ROOT/resources/expansion/enwiki.linktext.counts
+link_stats=`$TAC_ROOT/bin/get_expand_config.sh wikilinks /dev/null`
 candidates=$3
 response=$4
 

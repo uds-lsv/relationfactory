@@ -4,7 +4,7 @@
 
 RELLIST=`$TAC_ROOT/bin/get_expand_config.sh rellist $TAC_ROOT/config/rellist`
 RELCONFIG=`$TAC_ROOT/bin/get_expand_config.sh relations.config $TAC_ROOT/config/relations.config`
-LINKSTATS=$TAC_ROOT/resources/expansion/enwiki.linktext.counts
+LINKSTATS=`$TAC_ROOT/bin/get_expand_config.sh wikilinks /dev/null`
 ORG_SUFFIXES=$TAC_ROOT/resources/expansion/org_suffixes
 
 precision_expansion=`$TAC_ROOT/bin/get_config.sh precision_expansion true`

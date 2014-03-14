@@ -6,7 +6,7 @@ OUTPUT=$3
 
 MAPPING=`$TAC_ROOT/bin/get_expand_config.sh idfile_mapping`
 
-LINKSTAT=$TAC_ROOT/resources/expansion/enwiki.linktext.counts
+LINKSTAT=`$TAC_ROOT/bin/get_expand_config.sh wikilinks /dev/null`
 
 # Bring date into TIMEX2 format if possible.
 correct_date=`mktemp` 
