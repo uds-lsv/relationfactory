@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATTERNS=$TAC_ROOT/resources/manual_annotation/induced_patterns2013.txt
+PATTERNS=`$TAC_ROOT/bin/get_expand_config.sh induced_patterns`
 
 query_expanded=$1
 candidates=$2
