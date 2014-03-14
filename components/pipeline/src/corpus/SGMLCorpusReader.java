@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.log4j.Logger;
 import org.ccil.cowan.tagsoup.Parser;
@@ -59,9 +60,10 @@ public class SGMLCorpusReader {
       throws IOException {
     CorpusHandler handler = new CorpusHandler();
 
-    FileInputStream fIn = null;
+    InputStream fIn = null;
     try {
-      fIn = new FileInputStream(fn);
+      fIn = fn.endsWith(".gz") ?
+              new GZIPInputStream(new FileInputStream(fn)) :  new FileInputStream(fn);
       return readDocuments(fIn);
     } catch (FileNotFoundException e) {
       logger.error("Document not found: " + e.toString());
