@@ -6,8 +6,7 @@ FEATS=$2
 FEATUREMAP=`$TAC_ROOT/bin/get_expand_config.sh featuremap`
 FEATURESET=`$TAC_ROOT/bin/get_config.sh featureset`
 #BROWNCLASSES=`$TAC_ROOT/bin/get_expand_config.sh brownclasses`
-BROWNCLASSES=$TAC_ROOT/resources/relation_models/brown.classes
-LOG4J=file://$TAC_ROOT/config/log4j.config
+BROWNCLASSES=/dev/null
 
 echo 'feature map: '$FEATUREMAP
 echo 'feature set: '$FEATURESET
