@@ -8,6 +8,7 @@ Make sure the following software is installed:
 
 ghc, version >= 7.4.1
 cabal, version >= 1.14.0
+java / JDK, version >= 6 (the Oracle one)
 unix tools, including wget
 
 
