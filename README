@@ -57,9 +57,9 @@ $TAC_ROOT/bin/run.sh your_system.config
 
 7. Check response
 
-check the output file, /your/rundir/response_fast_pp13. It should contain for each query 
-some mixture of NIL answers and other answers, many of which score by 1.0, 
-others with lower score.
+check the output file, /your/rundir/response_fast_pp13. It should contain 
+for each query some mixture of NIL answers and other answers, many of which 
+score by 1.0, others with lower score.
 
 Evaluate your run using the official TAC scorer.
 
