@@ -1,53 +1,69 @@
 QUICK START
 ===========
------
-export the paths (e.g. to your ~/.bashrc) (replace "path-to" with the path where you plan to check out the system):
-
-export TAC_ROOT=/path-to/tac_kbp_system
-
------
-"generate" (prepare/install/...) the system: 
- 
-#> $TAC_ROOT/bin/generate_system.sh
-
------
-
-run the system on the 2011 data (replace "test-run" with a path NOT under $TAC_ROOT):
-
-#> cd /test-run/
-#> $TAC_ROOT/bin/run.sh $TAC_ROOT/evaluation/eval2011/queries_2012format.xml
-
-NOTE: The whole system assumes all data to be in the latest (=2012) format.
-Therefore, to run evaluations from previous years, converted queries have
-to be used (marked by 2012format, or similar).
 
 
-check the output file, '/test-run/response'. It should contain for each query 
+0. Prerequisites
+
+Make sure the following software is installed:
+
+ghc, version >= 7.4.1
+cabal, version >= 1.14.0
+unix tools, including wget
+
+
+1. Download models
+
+If you want to use pre-trained models, download them from our server:
+
+wget http://www.lsv.uni-saarland.de/data/relationfactory_models.tar.gz
+tar xzf relationfactory_models.tar.gz
+
+
+2. Set paths
+
+E.g. by putting the following lines in your ~/.bashrc or the like:
+
+# relationfactory clone
+export TAC_ROOT=/path/to/relationfactory
+# pre-trained models
+export TAC_MODELS=/path/to/relationfactory_models
+
+The TAC_ROOT variable has to be set. The TAC_MODELS variable is optional. 
+If it is not set the models have to be specified in the config file.
+
+
+3. Compile system
+
+$TAC_ROOT/bin/generate_system.sh
+
+
+4. Index corpus
+
+See the corresponding README in $TAC_ROOT/indexing
+
+
+5. Configure run
+
+The settings can be taken from $TAC_ROOT/config/system2013.config .
+Make sure to adapt it to your models and index locations.
+Also point to the TAC queries file for which you want to get results, and
+specify a rundir where files for that run are put.
+
+
+6. Run
+
+$TAC_ROOT/bin/run.sh your_system.config
+
+
+7. Check response
+
+check the output file, /your/rundir/response_fast_pp13. It should contain for each query 
 some mixture of NIL answers and other answers, many of which score by 1.0, 
 others with lower score.
 
-Evaluate your run:
+Evaluate your run using the official TAC scorer.
 
-$TAC_ROOT/evaluation/bin/score.sh response $TAC_ROOT/evaluation/eval2011/key_2012format
 
-Directories
-===========
+8. How to change the pipeline
 
-./bin           : top-level executables
-./components    : components of the system
-./config        : configuration files
-./doc           : documents describing (previous versions of) the system
-./evaluation    : evaluation scripts and data
-./lib           : 3rd party software
-./resources     : data used by the system (NE lists, index, etc)
-./training      : training scripts
-
-*/experimental directories are not yet part of the standard pipeline.
-
-Each directory has an own README describing its contents.
-
-How to change the pipeline
-==========================
-
-Change ./bin/makefile and insert a rule describing your new target.
-
+Change $TAC_ROOT/bin/makefile and insert a rule describing your new target.
