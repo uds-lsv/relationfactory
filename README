@@ -21,7 +21,7 @@ tar xzf relationfactory_models.tar.gz
 
 2. Set paths
 
-E.g. by putting the following lines in your ~/.bashrc or the like:
+E.g. by putting the following lines in your ~/.bashrc :
 
 # relationfactory clone
 export TAC_ROOT=/path/to/relationfactory
