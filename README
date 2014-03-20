@@ -29,7 +29,7 @@ export TAC_ROOT=/path/to/relationfactory
 export TAC_MODELS=/path/to/relationfactory_models
 
 The TAC_ROOT variable has to be set. The TAC_MODELS variable is optional. 
-If it is not set the models have to be specified in the config file.
+If it is not set, the models have to be specified in the config file.
 
 
 3. Compile system
