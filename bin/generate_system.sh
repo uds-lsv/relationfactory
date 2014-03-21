@@ -4,7 +4,9 @@ $TAC_ROOT/components/pipeline/build.sh
 
 echo "compiling ner module"
 cd $TAC_ROOT/components/ner/
+cabal update
 make
+cd -
 
 echo
 echo "compiling classifier"
