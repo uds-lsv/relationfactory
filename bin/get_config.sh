@@ -23,4 +23,4 @@ then
   conf=$DEFAULT_VALUE
 fi
 
-eval echo $conf
+echo $conf
