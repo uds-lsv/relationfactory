@@ -150,6 +150,7 @@ public class MatchRealOffsets {
     //multimatched);
   }
 
+    /*
   public List<OffsetPair> matchSentenceAndArgsFromDocid(String docId, 
       String sentence, String... args) {
     String docfn = docpaths.get(docId);
@@ -159,6 +160,7 @@ public class MatchRealOffsets {
     RawCorpusDocument doc = readDocumentFromFile(docfn, docId);
     return matchSentenceAndArgs(doc.getRawContent(), sentence, args);
   }
+  */
 
   public static List<OffsetPair> matchSentenceAndArgs(String docSgml, 
       String sentence, String... args) {

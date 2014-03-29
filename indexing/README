@@ -1,0 +1,25 @@
+This directory contains the makefile to index the TAC 2013 corpora.
+
+For creating the index:
+
+1. Make sure the $TAC_ROOT variable is set correcly, as described in the 
+   top-level README.
+
+2. Create a directory that will contain the index. Copy the makefile in that
+   directory. E.g.:
+
+   mkdir /path/to/2013index
+
+3. Edit the makefile so that the corpuspath variable points to where the TAC
+   corpus is stored in your directory structure. E.g.
+
+   corpuspath=/path/to/LDC2013E45_TAC_2013_KBP_Source_Corpus_disc_2
+
+4. Run the indexing by
+
+   make isindexcomplete
+
+5. For running a TAC run with that index, change the system.config accordingly: 
+
+   index /path/to/2013index/index
+   idfile_mapping /path/to/2013index/idfile_mapping

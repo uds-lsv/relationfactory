@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -46,8 +47,9 @@ public class CorpusReader {
     BufferedReader br = null;
     List<RawCorpusDocument> docs = new LinkedList<RawCorpusDocument>(); 
     try {
-      br = new BufferedReader(new InputStreamReader(
-          new FileInputStream(fn), "UTF-8"));
+      InputStream is = fn.endsWith(".gz") ?
+              new GZIPInputStream(new FileInputStream(fn)) :  new FileInputStream(fn);
+      br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
     } catch (IOException e) {
       logger.error("Could not open document file: " + e);
       return docs;
