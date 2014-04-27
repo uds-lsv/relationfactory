@@ -1,3 +1,9 @@
+RelationFactory is a relation extraction and knowledge-base population system.
+It was the top-ranked system in TAC KBP 2013 English Slot-filling (http://www.nist.gov/tac/2013/KBP/index.html).
+If you want to use RelationFactory in a TAC benchmark, please contact the authors (see LICENSE for details).
+RelationFactory uses SVMLight (http://svmlight.joachims.org/) for classification, so you must agree to the 
+License of SVMLight, especially to its restriction for scientific use only.
+
 QUICK START
 ===========
 
