@@ -69,7 +69,10 @@ for each query some mixture of NIL answers and other answers, many of which
 score by 1.0, others with lower score.
 
 Evaluate your run using the official TAC scorer.
-
+Note that due to refactoring, slightly different answers are returned than in TAC 2013.
+The 'exact' evaluation, that is dependent on document id's and offsets to be included in the answer pool,
+is very sensitive to that.
+Use 'anydoc' evaluation mode to obtain more robust scores.
 
 8. How to change the pipeline
 
