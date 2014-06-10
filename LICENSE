@@ -8,7 +8,9 @@ Redistribution and use in source and binary forms, with or without modification,
 
 3. The software may be used for participation in a TAC KBP evaluation campaign (http://www.nist.gov/tac/about/) only with explicit written permission by the copyright holders.
 
-4. If the software is used for a scientific publication, the following publication must be cited:
+4. If the software is used for a scientific publication, one of the following publications must be cited:
 Benjamin Roth, Tassilo Barth, Michael Wiegand, Mittul Singh, Dietrich Klakow. Effective Slot Filling Based on Shallow Distant Supervision Methods. NIST Text Analysis Conference 2013.
+or
+Benjamin Roth, Tassilo Barth, Grzegorz Chrupala, Martin Gropp and Dietrich Klakow. RelationFactory: A Fast, Modular and Effective System for Knowledge Base Population. EACL 2014.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
