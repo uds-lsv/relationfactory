@@ -1,7 +1,6 @@
 #!/bin/bash 
 
-# This script reads document ids from a .dscore file and
-# creates a file with all the sentences in these documents.
+# Tags sentences in drank format.
 #
 # Author: Grzegorz Chrupala and Benjamin Roth
 
