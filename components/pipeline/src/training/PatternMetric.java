@@ -84,6 +84,29 @@ public abstract class PatternMetric {
     return pattern.toString();
   }
 
+  public static String patternShortenedFromLine(String line){
+    String longPattern = patternFromLine(line);
+    String[] tokens = longPattern.split(" ");
+    String pattern;
+    if (tokens.length <= 6) {
+      pattern = longPattern;
+    } else {
+      int skipOver = tokens.length - 6;
+      StringBuffer sb = new StringBuffer();
+      for (int i = 0; i < 3; ++i) {
+        sb.append(tokens[i]);
+      }
+
+      int logBin = (int) (Math.log(skipOver) / Math.log(2));
+      sb.append(" [" + logBin + "] ");
+      for (int i = tokens.length - 3; i < tokens.length; ++i) {
+        sb.append(tokens[i]);
+      }
+      pattern = sb.toString();
+    }
+    return pattern;
+  }
+
   /**
    * This scores a pattern line as used in the pattern matcher file, i.e.
    * REL_NAME PATTERN

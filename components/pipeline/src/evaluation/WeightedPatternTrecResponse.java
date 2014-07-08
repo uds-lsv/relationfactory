@@ -27,6 +27,7 @@ public class WeightedPatternTrecResponse {
     options.addOption("o", true, "output trec-response file");
     options.addOption("p", true, "weighted (fast) patterns (no star, no left-right context)");
     options.addOption("k", true, "key to group trec queries, one of 'all', 'rel' (default) and 'qid'");
+    options.addOption("s", false, "flag to indicate that shortened patterns are to ne used");
     CommandLineParser parser = new BasicParser();
     CommandLine cl = parser.parse( options, args );
     String trecKeyType = TREC_KEY_REL;
@@ -46,7 +47,12 @@ public class WeightedPatternTrecResponse {
     Map<String, Double> responseBodyToMaxWeight = new HashMap<String, Double>();
     br = new BufferedReader(new FileReader(cl.getOptionValue("c")));
     for (String line; (line = br.readLine()) != null;) {
-      String pattern = PatternMetric.patternFromLine(line);
+      String pattern;
+      if (cl.hasOption("s")) {
+        pattern = PatternMetric.patternShortenedFromLine(line);
+      } else {
+        pattern = PatternMetric.patternFromLine(line);
+      }
       if (patToWeight.containsKey(pattern)) {
         //SF2     org:date_dissolved      2007    AFP_ENG_20080408.0582.LDC2009T13.3      23      26      12      13      The number of trademark registration applications filed by foreigners totalled 103,000 in 2007 , making up 14.5 percent of the total , the China News Agency reported on its website , citing figures from an industry forum .
         String[] parts = line.split("\t");
