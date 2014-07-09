@@ -43,16 +43,20 @@ public class WeightedPatternTrecResponse {
       patToWeight.put(parts[1], Double.parseDouble(parts[0]));
     }
     br.close();
-    
+
+    if (cl.hasOption("s")) {
+      System.err.println("Using shortened patterns.");
+    } else {
+      System.err.println("Using plain patterns.");
+    }
+
     Map<String, Double> responseBodyToMaxWeight = new HashMap<String, Double>();
     br = new BufferedReader(new FileReader(cl.getOptionValue("c")));
     for (String line; (line = br.readLine()) != null;) {
       String pattern;
       if (cl.hasOption("s")) {
-        System.err.println("Using shortened patterns.");
         pattern = PatternMetric.patternShortenedFromLine(line);
       } else {
-        System.err.println("Using plain patterns.");
         pattern = PatternMetric.patternFromLine(line);
       }
       if (patToWeight.containsKey(pattern)) {
