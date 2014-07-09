@@ -49,8 +49,10 @@ public class WeightedPatternTrecResponse {
     for (String line; (line = br.readLine()) != null;) {
       String pattern;
       if (cl.hasOption("s")) {
+        System.err.println("Using shortened patterns.");
         pattern = PatternMetric.patternShortenedFromLine(line);
       } else {
+        System.err.println("Using plain patterns.");
         pattern = PatternMetric.patternFromLine(line);
       }
       if (patToWeight.containsKey(pattern)) {
