@@ -43,6 +43,7 @@ public class FilterKeyFile {
     options.addOption("p", true, "filter by (fast) patterns from (tab'ed) training data");
     options.addOption("f", true, "format, one of 'tac' (default) or 'trec'");
     options.addOption("k", true, "key to group trec queries, one of 'all', 'rel' (default) and 'qid'");
+    options.addOption("s", false, "flag to indicate that shortened patterns are to ne used");
     CommandLineParser parser = new BasicParser();
     CommandLine cl = parser.parse( options, args );
     
@@ -61,7 +62,13 @@ public class FilterKeyFile {
       patternSet = new HashSet<String>();
       BufferedReader br = new BufferedReader(new FileReader(cl.getOptionValue("p")));
       for (String line; (line = br.readLine()) != null;) {
-        patternSet.add(PatternMetric.patternFromLine(line));
+        String pattern;
+        if (cl.hasOption("s")) {
+          pattern = PatternMetric.patternShortenedFromLine(line);
+        } else {
+          pattern = PatternMetric.patternFromLine(line);
+        }
+        patternSet.add(pattern);
       }
       br.close();
     }
@@ -70,8 +77,14 @@ public class FilterKeyFile {
     Set<String> queryRelAnswers = new HashSet<String>();
     BufferedReader br = new BufferedReader(new FileReader(cl.getOptionValue("c")));
     for (String line; (line = br.readLine()) != null;) {
+      String pattern;
+      if (cl.hasOption("s")) {
+        pattern = PatternMetric.patternShortenedFromLine(line);
+      } else {
+        pattern = PatternMetric.patternFromLine(line);
+      }
       if (patternSet != null && 
-          !patternSet.contains(PatternMetric.patternFromLine(line))) {
+          !patternSet.contains(pattern)) {
         // line not matchable;
         continue;
       }
