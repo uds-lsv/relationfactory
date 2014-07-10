@@ -88,12 +88,13 @@ public abstract class PatternMetric {
     String longPattern = patternFromLine(line);
     String[] tokens = longPattern.split(" ");
     String pattern;
-    if (tokens.length <= 6) {
+    int rel_args_2toks_len = 7;
+    if (tokens.length <= rel_args_2toks_len) {
       pattern = longPattern;
     } else {
-      int skipOver = tokens.length - 6;
+      int skipOver = tokens.length - rel_args_2toks_len;
       StringBuffer sb = new StringBuffer();
-      for (int i = 0; i < 3; ++i) {
+      for (int i = 0; i < 4; ++i) {
         sb.append(tokens[i]);
         sb.append(" ");
       }
