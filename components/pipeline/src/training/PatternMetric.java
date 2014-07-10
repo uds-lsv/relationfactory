@@ -95,11 +95,13 @@ public abstract class PatternMetric {
       StringBuffer sb = new StringBuffer();
       for (int i = 0; i < 3; ++i) {
         sb.append(tokens[i]);
+        sb.append(" ");
       }
 
       int logBin = (int) (Math.log(skipOver) / Math.log(2));
-      sb.append(" [" + logBin + "] ");
+      sb.append("[" + logBin + "]");
       for (int i = tokens.length - 3; i < tokens.length; ++i) {
+        sb.append(" ");
         sb.append(tokens[i]);
       }
       pattern = sb.toString();
