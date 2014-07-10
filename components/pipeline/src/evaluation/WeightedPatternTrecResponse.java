@@ -82,8 +82,6 @@ public class WeightedPatternTrecResponse {
             responseBodyToMaxWeight.get(body) : 0.0;
         maxWeight = Math.max(patToWeight.get(pattern), maxWeight);
         responseBodyToMaxWeight.put(body, maxWeight);
-      } else {
-        System.err.println("Pattern not scored:\n"+pattern);
       }
     }
     br.close();
