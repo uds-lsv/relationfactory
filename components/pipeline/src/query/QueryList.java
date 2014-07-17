@@ -172,7 +172,9 @@ public class QueryList {
       bw.append(" <beg>" + StringEscapeUtils.escapeXml(beg) + "</beg>\n");
       bw.append(" <end>" + StringEscapeUtils.escapeXml(end) + "</end>\n");
       bw.append(" <enttype>" + StringEscapeUtils.escapeXml(enttype) + "</enttype>\n");
-      bw.append(" <nodeid>" + StringEscapeUtils.escapeXml(nodeId) + "</nodeid>\n");
+      if (!nodeId.isEmpty()) {
+        bw.append(" <nodeid>" + StringEscapeUtils.escapeXml(nodeId) + "</nodeid>\n");
+      }
       if (!ignore.isEmpty()) {
         bw.append(" <ignore>");
         String sep = "";

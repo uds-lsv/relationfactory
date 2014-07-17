@@ -57,7 +57,7 @@ public class SupportDocs {
       bw.append(q.getId() + " 0 " + docFN + ":" + docId + " 1 1.0 lucene\n");
       
       String kbId = q.getNodeId();
-      if (!kbId.startsWith("NIL")) {
+      if (!(kbId.isEmpty() || kbId.startsWith("NIL"))) {
         String kbFN = kbDir + "/" + kbId;
         if(new File(kbFN).isFile()) {
           bw.append(q.getId() + " 0 " + kbFN + ":" + kbId + " 2 1.0 lucene\n");        

@@ -149,4 +149,20 @@ public class TextIdentifier {
   public void setQueryId(String qstr) {
     this.queryId = qstr;    
   }
+
+  public int getSentenceStart() {
+    return Integer.parseInt(getSentenceOffsets().split("-")[0]);
+  }
+
+  public int getSentenceEnd() {
+    return Integer.parseInt(getSentenceOffsets().split("-")[1]);
+  }
+
+  public int getFillerStart() {
+    return Integer.parseInt(getFillerOffsets().split("-")[0]);
+  }
+
+  public int getFillerEnd() {
+    return Integer.parseInt(getFillerOffsets().split("-")[1]);
+  }
 }

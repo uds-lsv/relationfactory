@@ -119,6 +119,10 @@ response: response_all_pp13
 response2012: response_all_pp12
 	cp -v $< $@
 
+# Postprocess response for 2014 format.
+%_pp14: % query_expanded.xml /dev/null
+	$(TAC_ROOT)/components/bin/postprocess2014.sh $+ $@
+
 # Template for postprocessing responses for 2013 format
 #%_pp13: % query_expanded.xml title_org.tabs
 %_pp13: % query_expanded.xml /dev/null
