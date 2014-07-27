@@ -27,9 +27,9 @@ public class ConvertResponse2012To2014 {
     int slotEnd = tid.getFillerEnd();
 
     // Provenance is indicated by a window of maximum size 150 characters.
-    if (sentStart - sentEnd + 1 > 150) {
+    if (sentEnd - sentStart + 1 > 150) {
       // If sentence is longer than allowed, return a window of allowed size around slot.
-      int slotLength = slotStart - slotEnd + 1;
+      int slotLength = slotEnd - slotStart + 1;
       int halfWindow = (150 - slotLength) / 2;
       int provStart = Math.max(sentStart, slotStart - halfWindow);
       int provEnd = Math.min(sentEnd, slotEnd + halfWindow);
