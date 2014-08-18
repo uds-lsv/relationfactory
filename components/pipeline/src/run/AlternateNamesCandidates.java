@@ -62,15 +62,19 @@ public class AlternateNamesCandidates {
 
   private static void printAlternateNamesCandidates(List<String> lines,
       Query query, TextIdentifier docQIdSnr) {
-    
-    String entTag = query.getEnttype().equals("PER") ? 
+    String entTypeLower = query.getEnttype().toLowerCase();
+    if (!(entTypeLower.equals("per")
+        || entTypeLower.equals("org"))) {
+      return;
+    }
+    String entTag = entTypeLower.equals("per") ?
         "PERSON" : "ORGANIZATION";
     Set<String> aliases = new HashSet<String>();
     for (String alias : query.getAliases()) {
       // Normalized form should be one of the normalized aliases.
       // Persons require white-space, since last name is not enough.
       if (!normalize(alias).equals(normalize(query.getName())) 
-          && (query.getEnttype().equals("ORG") || alias.contains(" "))) {
+          && (entTypeLower.equals("org") || alias.contains(" "))) {
         aliases.add(normalize(alias));
       }
     }

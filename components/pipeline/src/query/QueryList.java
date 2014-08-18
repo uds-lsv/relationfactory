@@ -93,6 +93,8 @@ public class QueryList {
         query.beg = buffer.toString();
       } else if (localName.equalsIgnoreCase("end")) {
         query.end = buffer.toString();
+      } else if (localName.equalsIgnoreCase("slot")) { // for coldstart
+        query.slot = buffer.toString();
       } else if (localName.equalsIgnoreCase("rel")) {
         if (attributes.getValue("listtype").equalsIgnoreCase("true")) {
           logger.debug("Found new listtype relation");
@@ -149,6 +151,7 @@ public class QueryList {
     private String docId = "";
     private String id = "";
     private String name = "";
+    private String slot = ""; // for coldstart
     private String enttype = "";
     private List<String> ignore = new ArrayList<String>();
     private List<String> aliases = new ArrayList<String>();
@@ -336,30 +339,31 @@ public class QueryList {
       String rel = line.trim();
       String enttype = relToEnttype.get(rel);
       for (Query q : getQueries()) {
-        if (q.enttype.equals(enttype) && !q.ignore.contains(rel)) {
+        if (q.slot.equals(rel) || // For coldstart
+            (q.slot.isEmpty() && q.enttype.equals(enttype) && !q.ignore.contains(rel))) {
           if (listRels.contains(rel)) {
             q.listRelations.add(rel);
           } else {
             q.singleRelations.add(rel);
           }
         }
+
       }
     }    
     br.close();
   }
 
-  
   public void addRuleExpansions(boolean addLastName, Collection<String> orgSuffixes) 
       throws IOException {
     for (Query q : getQueries()) {
-      if ("PER".equals(q.enttype) && addLastName) {
+      if ("per".equals(q.enttype.toLowerCase()) && addLastName) {
         String[] parts = q.name.split(" ");
         String lastName = parts[parts.length - 1];
         if (!q.aliases.contains(lastName)) {
           q.aliases.add(lastName);
         }
       }
-      if ("ORG".equals(q.enttype)) {
+      if ("org".equals(q.enttype.toLowerCase())) {
         for (String expansion : suffixExpand(q.name, orgSuffixes)) {
           if (!expansion.equals(q.name) && !expansion.isEmpty() &&
               Character.isUpperCase(expansion.charAt(0)) &&
