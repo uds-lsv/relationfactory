@@ -89,7 +89,7 @@ public class Retrieve {
       
       for (String alias : q.getAliases()) {
         String delimAlias = " " + alias + " "; 
-        if (q.getEnttype().toLowerCase().equals("org") || alias.contains(" ")) {
+        if (!q.getEnttype().toLowerCase().equals("per") || alias.contains(" ")) {
           String expansionQstr = "\"" + QueryParser.escape(alias) + "\"";
           double expansionPMI = 
               pmi(parser.parse(queryStr), parser.parse(expansionQstr), is);

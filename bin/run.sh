@@ -1,7 +1,7 @@
 #!/bin/bash
 # run.sh <system.config> [<goal>]
 
-config=`readlink -f $1`
+config=$1
 
 # If goal not given as argument, take goal from config file.
 if [ $# -ne 2 ]
