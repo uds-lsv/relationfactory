@@ -38,6 +38,7 @@ public class Features {
   public static final String FGRP_SKIP_EXACT = "skip_exact";
   public static final String FGRP_TOPIC = "topic";
   public static final String FGRP_INTERTEXT = "intertext";
+  public static final String FGRP_INTERTEXT_SHORT = "intertext_short";
   public static final String FGRP_MINTZ_NOARGS = "mintz_noargs";
   
   public static final String FGRP_ARG = "arg";
@@ -466,6 +467,23 @@ public class Features {
         logger.debug("Nr. of features for instance: " + inst.getFeatureList().size());
       }
     }
+
+    if (featuretypes.contains(FGRP_INTERTEXT_SHORT)) {
+      if (firstMethodInvocationInstance) {
+        logger.debug("Adding feature set: " + FGRP_INTERTEXT_SHORT);
+      }
+      Instance.Builder fgrpInst = Instance.newBuilder();
+
+      fgrpInst = sfe.addIntertextShort(fgrpInst, matchingSentences, relation);
+
+      fgrpInst = sfe.sortAndSumFeatures(fgrpInst);
+      fgrpInst = sfe.normalizeFeaturesToMax(fgrpInst);
+
+      inst = sfe.mergeFeatures(inst, fgrpInst.build());
+      if (firstMethodInvocationInstance) {
+        logger.debug("Nr. of features for instance: " + inst.getFeatureList().size());
+      }
+    }
     
     if (featuretypes.contains(FGRP_SKIP_EXACT)) {
       if (firstMethodInvocationInstance) {
@@ -553,6 +571,7 @@ public class Features {
             !type.equals(FGRP_SKIP_FUZZY) &&
             !type.equals(FGRP_SKIP_EXACT) &&
             !type.equals(FGRP_INTERTEXT) &&
+            !type.equals(FGRP_INTERTEXT_SHORT) &&
             !type.equals(FGRP_TOPIC) &&
             !type.equals(FGRP_MINTZ_NOARGS)) {
           throw new IllegalArgumentException("unknown feaure type: " + type);

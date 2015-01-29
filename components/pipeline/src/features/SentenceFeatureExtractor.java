@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.QueryParser;
@@ -77,6 +78,7 @@ public class SentenceFeatureExtractor {
   public static final String END_LETTERS_PREFIX = "#END_LTRS#";
   public static final String PERMUTATION_INVARIANT_OVERLAP_FEATURE = "#INV_OVLP#";
   public static final String INTERTEXT_FEATURE = "#INTERTEXT#";
+  public static final String INTERTEXT_SHORT_FEATURE = "#INTERTEXT_SHORT#";
   public static final String LETTER_BIGRAM_JACCARD_FEATURE = "#LBJ#";
   public static final String LDA_FEATURE_PREFIX = "#LDA#";
   public static final String LOG_PAIR_DOCFREQ_FEATURE = "#LPDF#";
@@ -1888,6 +1890,79 @@ public class SentenceFeatureExtractor {
     sb.append(arg1first ? "ARG2" : "ARG1");
 
     String interText = INTERTEXT_FEATURE + sb.toString(); // TODO
+    addFeature(inst, interText, sentenceWeight);
+    return inst;
+  }
+
+
+  public Builder addIntertextShort(Builder inst, List<Document> matchingSentences, String relation) {
+    for (Document doc : matchingSentences) {
+      for (int cgi = 0; cgi < doc.getCompoundCount(); ++cgi) {
+        CompoundGroup cg = doc.getCompound(cgi);
+        if (cg.getType() == AnnotationType.PROPERTY) {
+          for (int ci = 0; ci < cg.getCompoundCount(); ++ci) {
+            Compound c = cg.getCompound(ci);
+            if (c.getText().equals(relation)) {
+              inst = addIntertextShort(doc, cgi, ci, inst, 2);
+            }
+          }
+        }
+      }
+    }
+    return inst;
+  }
+
+  private Builder addIntertextShort(Document doc, int cgi, int ci, Builder inst, int maxTokensLeftRight) {
+    StringBuilder sb = new StringBuilder();
+
+    Compound c = doc.getCompound(cgi).getCompound(ci);
+    double sentenceWeight = c.hasWeight() ? c.getWeight() : 1.0;
+    int argIdx1Start = c.getSlot(0).getStartToken();
+    int argIdx1End = c.getSlot(0).getEndToken();
+    int argIdx2Start = c.getSlot(1).getStartToken();
+    int argIdx2End = c.getSlot(1).getEndToken();
+    int leftEnd;
+    int rightStart;
+    boolean arg1first = argIdx1Start < argIdx2Start;
+    if (arg1first) {
+      leftEnd = argIdx1End;
+      rightStart = argIdx2Start;
+    } else {
+      leftEnd = argIdx2End;
+      rightStart = argIdx1Start;
+    }
+
+    String logbin = "";
+    Boolean writeLogbin = false;
+    if  (rightStart - leftEnd > 2 * maxTokensLeftRight) {
+      logbin = "[" + (int) (Math.log(rightStart - leftEnd - 2 * maxTokensLeftRight) / Math.log(2)) + "]";
+      writeLogbin = true;
+    }
+
+    sb.append(arg1first ? "ARG1" : "ARG2").append(" ");
+    for (int i = leftEnd; i < rightStart; ++i) {
+
+      if (i >= leftEnd + maxTokensLeftRight && i < rightStart - maxTokensLeftRight) {
+        if (writeLogbin) {
+          sb.append(logbin).append(" ");
+          writeLogbin = false;
+        }
+      } else {
+        String tok = doc.getToken(i).getText();
+        sb.append(tok).append(" ");
+      }
+    }
+    sb.append(arg1first ? "ARG2" : "ARG1");
+
+    String interText = INTERTEXT_SHORT_FEATURE + sb.toString(); // TODO
+
+    // TODO: debugging
+    /*
+    System.out.println("===");
+    System.out.println(DocumentExtractor.textFromTokens(doc));
+    System.out.println(DocumentExtractor.textFromTokens(doc, leftEnd, rightStart));
+    System.out.println(interText);
+*/
     addFeature(inst, interText, sentenceWeight);
     return inst;
   }
