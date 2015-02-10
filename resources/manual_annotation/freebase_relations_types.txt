@@ -1,3 +1,6 @@
+# Format:
+# <TAC rel> <FB arg1 type> <FB rel>* <FB arg2 type>
+
 per:alternate_names /people/person /common/topic/alias /type/text
 
 per:date_of_birth /people/person /people/person/date_of_birth /type/datetime
