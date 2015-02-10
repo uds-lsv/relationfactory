@@ -1,0 +1,96 @@
+per:alternate_names /people/person /common/topic/alias /type/text
+
+per:date_of_birth /people/person /people/person/date_of_birth /type/datetime
+# no results for age
+per:age /people/person /people/person/age /measurement_unit/dated_integer/number /type/int
+per:country_of_birth /people/person /people/person/place_of_birth /location/country
+per:state_or_province_of_birth /people/person /people/person/place_of_birth /government/political_district
+per:state_or_province_of_birth /people/person /people/person/place_of_birth /location/administrative_division
+per:city_of_birth /people/person /people/person/place_of_birth /location/citytown
+per:origin /people/person /people/person/ethnicity /people/ethnicity
+per:origin /people/person /people/person/nationality /location/country
+
+per:date_of_death /people/person /people/deceased_person/date_of_death /type/datetime
+# no results for country_of_death
+per:country_of_death /people/person /people/deceased_person/place_of_death /location/country
+per:state_or_province_of_death /people/person /people/deceased_person/place_of_death /government/political_district
+per:state_or_province_of_death /people/person /people/deceased_person/place_of_death /location/administrative_division
+per:city_of_death /people/person /people/deceased_person/place_of_death /location/citytown
+per:cause_of_death /people/person /people/deceased_person/cause_of_death /people/cause_of_death
+
+per:countries_of_residence /people/person /people/person/places_lived /people/place_lived/location /location/country
+per:states_or_provinces_of_residence /people/person /people/person/places_lived /people/place_lived/location /government/political_district
+per:states_or_provinces_of_residence /people/person /people/person/places_lived /people/place_lived/location /location/administrative_division
+per:cities_of_residence /people/person /people/person/places_lived /people/place_lived/location /location/citytown
+
+per:schools_attended /people/person /people/person/education /education/education/institution /education/educational_institution
+
+per:title /people/person /people/person/profession /people/profession
+per:title /people/person /people/person/employment_history /business/employment_tenure/title /business/job_title
+
+per:member_of /people/person /organization/organization_member/member_of /organization/organization_membership/organization /organization/organization
+per:member_of /people/person /soccer/football_player/current_team /soccer/football_roster_position/team /organization/organization
+per:member_of /people/person /baseball/baseball_player/former_teams /baseball/baseball_historical_roster_position/team /organization/organization
+per:member_of /people/person /baseball/baseball_player/current_team /baseball/baseball_roster_position/team /organization/organization
+per:member_of /people/person /government/politician/party /government/political_party_tenure/party /organization/organization
+per:member_of /people/person /government/politician/government_positions_held /government/government_position_held/governmental_body /organization/organization
+
+per:employee_of /people/person /people/person/employment_history /business/employment_tenure/company /organization/organization
+per:employee_of /people/person /government/politician/government_positions_held /government/government_position_held/jurisdiction_of_office /government/governmental_jurisdiction
+
+
+per:employee_or_member_of /people/person /organization/organization_member/member_of /organization/organization_membership/organization /organization/organization
+per:employee_or_member_of /people/person /soccer/football_player/current_team /soccer/football_roster_position/team /organization/organization
+per:employee_or_member_of /people/person /baseball/baseball_player/former_teams /baseball/baseball_historical_roster_position/team /organization/organization
+per:employee_or_member_of /people/person /baseball/baseball_player/current_team /baseball/baseball_roster_position/team /organization/organization
+per:employee_or_member_of /people/person /government/politician/party /government/political_party_tenure/party /organization/organization
+per:employee_or_member_of /people/person /government/politician/government_positions_held /government/government_position_held/governmental_body /organization/organization
+per:employee_or_member_of /people/person /people/person/employment_history /business/employment_tenure/company /organization/organization
+per:employee_or_member_of /people/person /government/politician/government_positions_held /government/government_position_held/jurisdiction_of_office /government/governmental_jurisdiction
+
+
+per:religion /people/person /people/person/religion /religion/religion
+per:spouse /people/person /people/person/spouse_s /people/marriage/spouse /people/person
+per:children /people/person /people/person/children /people/person
+per:parents /people/person /people/person/parents /people/person
+per:siblings /people/person /people/person/sibling_s /people/sibling_relationship/sibling /people/person
+per:other_family /people/person /people/person/parents /people/person/parents /people/person
+per:other_family /people/person /people/person/children /people/person/children /people/person
+
+per:charges /people/person /base/crime/convicted_criminal/convictions /base/crime/criminal_conviction/guilty_of /base/fight/crime_type
+per:charges /people/person /base/crime/convicted_criminal/convictions /base/crime/criminal_conviction/guilty_of /law/legal_subject
+
+org:alternate_names /organization/organization /common/topic/alias /type/text
+
+org:political_religious_affiliation /organization/organization /organization/organization/sectors /organization/organization_sector
+org:political_religious_affiliation /organization/organization /organization/organization/sectors /religion/religion
+org:political_religious_affiliation /organization/organization /government/political_party/ideology /government/political_ideology
+org:political_religious_affiliation /organization/organization /government/political_party/ideology /religion/religion
+org:political_religious_affiliation /organization/organization /organization/organization/partnerships /organization/organization_partnership/members /government/political_party
+org:political_religious_affiliation /organization/organization /organization/organization/partnerships /organization/organization_partnership/members /religion/religious_organization
+
+org:top_members_employees /organization/organization /organization/organization/board_members /organization/organization_board_membership/member /people/person
+org:top_members_employees /organization/organization /organization/organization/leadership /organization/leadership/person /people/person
+org:number_of_employees_members /organization/organization /organization/membership_organization/number_of_members /measurement_unit/dated_integer/number /type/int
+
+org:members /organization/organization /sports/sports_league/teams /sports/sports_league_participation/team /organization/organization
+org:members /organization/organization /organization/membership_organization/members /organization/organization_membership/member /organization/organization
+org:member_of /organization/organization /sports/sports_team/league /sports/sports_league_participation/league /organization/organization
+org:member_of /organization/organization /organization/organization_member/member_of /organization/organization_membership/organization /organization/organization
+org:subsidiaries /organization/organization /organization/organization/child /organization/organization_relationship/child /organization/organization
+org:parents /organization/organization /organization/organization/parent /organization/organization_relationship/parent /organization/organization
+
+org:founded_by /organization/organization /organization/organization/founders /people/person
+org:founded /organization/organization /organization/organization/date_founded /type/datetime
+org:dissolved /organization/organization /business/defunct_company/ceased_operations /type/datetime
+
+org:country_of_headquarters /organization/organization /organization/organization/headquarters /location/mailing_address/citytown /location/location/containedby /location/country
+org:state_or_province_of_headquarters /organization/organization /organization/organization/headquarters /location/mailing_address/state_province_region /location/administrative_division
+org:state_or_province_of_headquarters /organization/organization /organization/organization/headquarters /location/mailing_address/state_province_region /government/political_district
+org:city_of_headquarters /organization/organization /organization/organization/headquarters /location/mailing_address/citytown /location/citytown
+
+org:shareholders /organization/organization /business/issuer/issue /business/issue/holders /business/holding/holder /organization/organization
+org:shareholders /organization/organization /business/issuer/issue /business/issue/holders /business/holding/holder /people/person
+
+org:website /organization/organization /common/topic/official_website /type/uri
+
