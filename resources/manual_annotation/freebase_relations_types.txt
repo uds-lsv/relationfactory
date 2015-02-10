@@ -1,5 +1,5 @@
 # Format:
-# <TAC rel> <FB arg1 type> <FB rel>* <FB arg2 type>
+# <TAC rel> <FB arg1 type> <FB rel>+ <FB arg2 type>
 
 per:alternate_names /people/person /common/topic/alias /type/text
 
