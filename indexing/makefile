@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 corpuspath=/projects/corpora/TAC_KBP_13/LDC2013E45_TAC_2013_KBP_Source_Corpus_disc_2
 corpusdatapath=$(corpuspath)/data/English/
 corpusdoclistspath=$(corpuspath)/docs/doclists/eng_{nw,wb,df}_doclist
