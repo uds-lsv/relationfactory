@@ -91,7 +91,10 @@ public class SentenceErrorExamples {
       String qid = parts[0];
       String rel = parts[1];
       String response = parts[2];
-      String docid = parts[3].replaceFirst("\\.[0-9]+$", "");
+// old docid encoding:
+//      String docid = parts[3].replaceFirst("\\.[0-9]+$", "");
+// new docid encoding:
+      String docid = parts[3].split(":", 2)[0];
       String tuple = qid + "\t" + rel + "\t" + response + "\t" + docid;
       if (tuple.equals(maxNegativesTuples.get(rel))) {
         System.out.println(line);
@@ -105,7 +108,10 @@ public class SentenceErrorExamples {
       String qid = parts[0];
       String rel = parts[1];
       String response = parts[2];
-      String docid = parts[3].replaceFirst("\\.[0-9]+$", "");
+// old docid encoding:
+//      String docid = parts[3].replaceFirst("\\.[0-9]+$", "");
+// new docid encoding:
+      String docid = parts[3].split(":", 2)[0];
       String tuple = qid + "\t" + rel + "\t" + response + "\t" + docid;
       if (tuple.equals(minPositivesTuples.get(rel))) {
         System.out.println(line);
