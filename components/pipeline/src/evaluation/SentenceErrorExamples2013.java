@@ -94,6 +94,10 @@ public class SentenceErrorExamples2013 {
       }
     }
     br.close();
+
+    System.out.println("Positives in key: " + positives.size());
+    System.out.println("Negatives in key: " + negatives.size());
+
     
     // This maps relations to positive tuples with minimum scores.
     Map<String, String> minPositivesTuples = new TreeMap<String, String>();
