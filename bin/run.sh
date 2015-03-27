@@ -5,6 +5,8 @@ config=$(cd "$(dirname "$1")"; pwd)/$(basename $1)
 #config=`readlink -f $1`
 #config=$1
 
+export LANG=en_US.UTF-8
+
 # If goal not given as argument, take goal from config file.
 if [ $# -ne 2 ]
 then

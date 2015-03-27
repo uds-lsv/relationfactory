@@ -1,9 +1,9 @@
 #!/bin/bash 
-
 # Tags sentences in drank format.
 #
 # Author: Grzegorz Chrupala and Benjamin Roth
 
+set -e
 
 SPECIALENT=$TAC_ROOT/resources/special_NE_list/
 

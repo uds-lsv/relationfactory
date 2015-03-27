@@ -13,6 +13,18 @@ echo $MODELPATH
 while read RELATION
 do
   echo $RELATION
+  MODEL=$MODELPATH/$RELATION.mdl
+  
+  if [ ! -f $MODEL ]
+  then
+    echo "==="
+    echo "WARNING"
+    echo "no model found for relation: " $RELATION
+    echo "... SKIPPING ..."
+    echo "==="
+    continue      # Skip rest of this particular loop iteration.
+  fi
+
   TMPFILE=`mktemp`
   TMPFEATS=`mktemp`
   TMPBODY=`mktemp`
@@ -28,7 +40,6 @@ do
   # Not necessary, from 2012 on, relation names can all be valid filenames.
   # NORMREL=`echo $RELATION | tr ':' '_' | tr '/' '_'`
   # MODEL=$MODELPATH/$NORMREL.mdl
-  MODEL=$MODELPATH/$RELATION.mdl
 
   #/home/beroth/libs/svm_light/svm_classify $TMPFEATS $MODEL $TMPFILE
   $TAC_ROOT/lib/svm_light/svm_classify $TMPFEATS $MODEL $TMPFILE

@@ -46,7 +46,6 @@ org:organizations_founded
 per:holds_shares_in
 per:organizations_founded
 per:top_member_employee_of
-gpe:employees_or_members
 gpe:births_in_city
 gpe:births_in_stateorprovince
 gpe:births_in_country
@@ -56,8 +55,6 @@ gpe:residents_of_country
 gpe:deaths_in_city
 gpe:deaths_in_stateorprovince
 gpe:deaths_in_country
-gpe:holds_shares_in
-gpe:organizations_founded
 gpe:member_of
 gpe:subsidiaries
 gpe:headquarters_in_city
