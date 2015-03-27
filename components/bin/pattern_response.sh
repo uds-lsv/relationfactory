@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATTERNS=$TAC_ROOT/resources/manual_annotation/context_patterns2012.txt
+PATTERNS=`$TAC_ROOT/bin/get_expand_config.sh context_patterns $TAC_ROOT/resources/manual_annotation/context_patterns2012.txt`
 
 query_expanded=$1
 candidates=$2
