@@ -192,7 +192,7 @@ public class RecallErrorAnalysis {
                 hasOverlap = true;
               } else {
                 Collection<OffsetPair> allSlotOffsets =
-                    queryRelDocToSlotOffsets.get(qid + ":" + docid);
+                    queryDocToSlotOffsets.get(qid + ":" + docid);
                 matchesOtherTag = almostExactMatch(slStart, slEnd, allSlotOffsets);
               }
             }
