@@ -58,6 +58,10 @@ public class RecallErrorAnalysis {
     br.close();
     
     Multimap<String, OffsetPair> queryRelDocToSlotOffsets = HashMultimap.create();
+
+    // All answers for this query, irrespective of relation.
+    Multimap<String, OffsetPair> queryDocToSlotOffsets = HashMultimap.create();
+
     br = new BufferedReader(new FileReader(taggedCandidatesFn));
     for (String line; (line = br.readLine()) != null;) {
       Candidate cand = Candidate.fromDelimLine(line);
@@ -66,6 +70,7 @@ public class RecallErrorAnalysis {
       }
       
       String queryRelDoc = cand.getQid() + ":"  + cand.getRel() + ":" + cand.getTextId().getDocId();
+      String queryDoc = cand.getQid() + ":" + cand.getTextId().getDocId();
       
       String slotOffsets = cand.getTextId().getFillerOffsets();
       int slotStart = Integer.parseInt(slotOffsets.split("-")[0]);
@@ -73,6 +78,8 @@ public class RecallErrorAnalysis {
       
       OffsetPair slotOffsetPair = new OffsetPair(slotStart, slotEnd);
       queryRelDocToSlotOffsets.put(queryRelDoc, slotOffsetPair);
+
+      queryDocToSlotOffsets.put(queryDoc, slotOffsetPair);
     }
     br.close();    
 
@@ -80,9 +87,12 @@ public class RecallErrorAnalysis {
     int numMissedQuery = 0;
     int numCrossSentence = 0;
     int numInexactTagMatch = 0;
+    int otherTagMatch = 0;
     int numNoTagMatch = 0;
+
     //int numExactTagMatch = 0;
     int numOther = 0;
+
     
     br = new BufferedReader(new FileReader(missedContextsFn));
     for (String line; (line = br.readLine()) != null;) {
@@ -167,6 +177,7 @@ public class RecallErrorAnalysis {
             
             boolean matchesExact = false;
             boolean hasOverlap = false;
+            boolean matchesOtherTag = false;
             
             for (String so : slotOffsets) {
               int slStart = Integer.parseInt(so.split("-")[0]);
@@ -179,6 +190,10 @@ public class RecallErrorAnalysis {
                 matchesExact = true;
               } else if (overlap(slStart, slEnd, candSlotOffsets)) {
                 hasOverlap = true;
+              } else {
+                Collection<OffsetPair> allSlotOffsets =
+                    queryRelDocToSlotOffsets.get(qid + ":" + docid);
+                matchesOtherTag = almostExactMatch(slStart, slEnd, allSlotOffsets);
               }
             }
             if (matchesExact) {
@@ -191,6 +206,11 @@ public class RecallErrorAnalysis {
                 System.out.println("[INEXACT]\t" + line);
               }
               numInexactTagMatch += 1;
+            } else if(matchesOtherTag) {
+              if (otherTagMatch < 10 || verbose) {
+                System.out.println("[OTHERTAG]\t" + line);
+              }
+              otherTagMatch += 1;
             } else {
               if (numNoTagMatch < 10 || verbose) {
                 System.out.println("[NOTAG]\t" + line);
@@ -209,8 +229,9 @@ public class RecallErrorAnalysis {
     System.out.println("[_STAT]\t2 Query not matched:\t" + numMissedQuery + "\t" + (numMissedQuery/sum) + "%");
     System.out.println("[_STAT]\t3 Slot not in query sentence:\t" + numCrossSentence + "\t" + (numCrossSentence/sum) + "%");
     System.out.println("[_STAT]\t4 Slot tag inexact:\t" + numInexactTagMatch + "\t" + (numInexactTagMatch/sum) + "%");
-    System.out.println("[_STAT]\t5 Slot not tagged:\t" + numNoTagMatch + "\t" + (numNoTagMatch/sum) + "%");
-    System.out.println("[_STAT]\t6 Other (validation):\t" + numOther + "\t" + (numOther/sum) + "%");
+    System.out.println("[_STAT]\t5 Wrong slot tag:\t" + otherTagMatch + "\t" + (otherTagMatch/sum) + "%");
+    System.out.println("[_STAT]\t6 Slot not tagged:\t" + numNoTagMatch + "\t" + (numNoTagMatch/sum) + "%");
+    System.out.println("[_STAT]\t7 Other (validation):\t" + numOther + "\t" + (numOther/sum) + "%");
   }
 
   private static boolean isInSomeRange(int qStart, int qEnd,
