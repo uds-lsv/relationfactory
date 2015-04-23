@@ -16,7 +16,7 @@ import util.Responses;
 
 public class WeightedPatternResponse {
   public static void main(String[] args) throws IOException {
-    if (args.length != 3 && args.length != 4) {
+    if (args.length != 3 && args.length != 4 && args.length != 5) {
       System.err.println("WeightedPatternResponse " +
           "<query_expanded_xml> <candidates> <weighted_patterns> [<min_score>] [<shortened=true|false>]");
       System.err.println("A response is written to Stdout.");
