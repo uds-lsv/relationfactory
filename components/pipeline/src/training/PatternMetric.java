@@ -22,6 +22,7 @@ public abstract class PatternMetric {
   public static final int ARG1_ID = 0;
   public static final int REL_ID = 1;
   public static final int ARG2_ID = 2;
+  // 3: doc id / sentence number
   public static final int BEG_ARG1 = 4;
   public static final int END_ARG1 = 5;
   public static final int BEG_ARG2 = 6;
