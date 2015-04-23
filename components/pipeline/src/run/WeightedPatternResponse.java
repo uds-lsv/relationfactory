@@ -18,7 +18,7 @@ public class WeightedPatternResponse {
   public static void main(String[] args) throws IOException {
     if (args.length != 3 && args.length != 4) {
       System.err.println("WeightedPatternResponse " +
-          "<query_expanded_xml> <candidates> <weighted_patterns> [<min_score>]");
+          "<query_expanded_xml> <candidates> <weighted_patterns> [<min_score>] [<shortened=true|false>]");
       System.err.println("A response is written to Stdout.");
       return;
     }
@@ -27,11 +27,15 @@ public class WeightedPatternResponse {
     String candidatesFn = args[1];
     String patFn = args[2];
     double minScore = 0.0;
-    if (args.length == 4) {
+    if (args.length >= 4) {
       minScore = Double.parseDouble(args[3]);
     }
-    
-    // Read patterns.
+    boolean shortened = false;
+    if (args.length == 5) {
+      shortened = args[4] == "true";
+    }
+
+      // Read patterns.
     Map<String, Double> patToWeight = new HashMap<String, Double>();
     BufferedReader br = new BufferedReader(new FileReader(patFn));
     for (String line; (line = br.readLine()) != null;) {
@@ -49,7 +53,12 @@ public class WeightedPatternResponse {
 
     br = new BufferedReader(new FileReader(candidatesFn));
     for (String line; (line = br.readLine()) != null;) {
-      String pattern = PatternMetric.patternFromLine(line);
+      String pattern;
+      if (shortened) {
+        pattern = PatternMetric.patternShortenedFromLine(line);
+      } else {
+        pattern = PatternMetric.patternFromLine(line);
+      }
       if (!patToWeight.containsKey(pattern)) {
         continue;
       }
