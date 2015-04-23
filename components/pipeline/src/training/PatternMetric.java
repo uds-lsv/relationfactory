@@ -85,30 +85,63 @@ public abstract class PatternMetric {
     return pattern.toString();
   }
 
-  public static String patternShortenedFromLine(String line){
-    String longPattern = patternFromLine(line);
-    String[] tokens = longPattern.split(" ");
-    String pattern;
-    int rel_args_2toks_len = 7;
-    if (tokens.length <= rel_args_2toks_len) {
-      pattern = longPattern;
-    } else {
-      int skipOver = tokens.length - rel_args_2toks_len;
-      StringBuffer sb = new StringBuffer();
-      for (int i = 0; i < 4; ++i) {
-        sb.append(tokens[i]);
-        sb.append(" ");
-      }
 
-      int logBin = (int) (Math.log(skipOver) / Math.log(2));
-      sb.append("[" + logBin + "]");
-      for (int i = tokens.length - 3; i < tokens.length; ++i) {
-        sb.append(" ");
-        sb.append(tokens[i]);
-      }
-      pattern = sb.toString();
+  public static String patternShortenedFromTokens(String[] tokens,
+                                                  int begArg1, int endArg1, int begArg2, int endArg2) {
+    int patternBeg = endArg1;
+    int patternEnd = begArg2;
+    String argAppearsFirst = ARG1;
+    String argAppearsSecond = ARG2;
+
+    if (begArg1 > begArg2) {
+      // if agr2 precedes arg1:
+      patternBeg = endArg2;
+      patternEnd = begArg1;
+      argAppearsFirst = ARG2;
+      argAppearsSecond = ARG1;
     }
-    return pattern;
+
+    // extract the pattern:
+    StringBuffer pattern = new StringBuffer(argAppearsFirst + " ");
+    for (int i = patternBeg; i < patternEnd; i++) {
+      if (i-patternBeg < 2 || patternEnd - i <= 2) {
+        // positions near beginning or end
+        pattern.append(tokens[i]);
+      } else {
+        //position in the middle
+        int skippedOver = patternEnd - patternBeg - 4;
+        int logBin = (int) (Math.log(skippedOver) / Math.log(2));
+        pattern.append("[" + logBin + "]");
+        i += skippedOver -1;
+      }
+      pattern.append(" ");
+    }
+    pattern.append(argAppearsSecond);
+    return pattern.toString();
+
+  }
+
+
+  public static String patternShortenedFromLine(String line){
+    String[] lineFields = line.split("\t");
+
+    if (lineFields.length != NUM_FIELDS) {
+      throw new IllegalArgumentException(
+          "Incorrect number of fields on line :\n" + line);
+    }
+
+    int begArg1 = Integer.parseInt(lineFields[BEG_ARG1]);
+    int endArg1 = Integer.parseInt(lineFields[END_ARG1]);
+    int begArg2 = Integer.parseInt(lineFields[BEG_ARG2]);
+    int endArg2 = Integer.parseInt(lineFields[END_ARG2]);
+
+    String rel = lineFields[REL_ID];
+
+    String[] tokens = lineFields[SENTENCE_ID].split("\\s+");
+
+    String pattern = patternShortenedFromTokens(tokens, begArg1, endArg1, begArg2, endArg2);
+
+    return rel + " " + pattern;
   }
 
   /**

@@ -12,11 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import matcher.CandidateMatcher;
-import matcher.ContextPatternMatcher;
-import matcher.FastContextPatternMatcher;
-import matcher.StarContextPatternMatcher;
-import matcher.Matcher;
+import matcher.*;
 import query.QueryList;
 import rerac.protos.Corpus.Document;
 import util.DocumentExtractor;
@@ -41,7 +37,7 @@ public class PatternResponse {
   public static void main(String[] args) throws IOException {
     if (args.length != 4 && args.length != 5) {
       System.err.println("PatternResponse " +
-          "<query_expanded_xml> <sentences> <patterns> <team_id> [<fast_match=true|false>]");
+          "<query_expanded_xml> <sentences> <patterns> <team_id> [<fast_match=true|false|shortened>]");
       System.err.println(
           "Fast matching allows only for patterns starting with $ARG1, having no star");
       System.err.println(
@@ -52,12 +48,16 @@ public class PatternResponse {
     String sentenceFn = args[1];
     String patternsFn = args[2];
     String teamId = args[3];
-    boolean fast = (args.length > 4 && args[4].equals("true")) ? true : false;
+    boolean fast = (args.length > 4 && (args[4].equals("true") || args[4].equals("shortened"))) ? true : false;
+    boolean shortened = fast && args[4].equals("shortened");
     
     if (fast) {
-      System.err.println("Fast matching");
+      System.err.println("Fast matching.");
+      if (shortened) {
+        System.err.println("Using shortened patterns.");
+      }
     } else {
-      System.err.println("Star pattern matching");
+      System.err.println("Star pattern matching.");
     }
     
     Matcher m1 = new CandidateMatcher(0);
@@ -85,8 +85,13 @@ public class PatternResponse {
         new HashMap<String, ContextPatternMatcher>();
     for (String rel : relToPatterns.keySet()) {
       if (fast) {
-        relToContextMatcher.put(rel, 
-            new FastContextPatternMatcher(m1, m2, relToPatterns.get(rel)));        
+        if (shortened) {
+          relToContextMatcher.put(rel,
+              new ShortenedContextPatternMatcher(m1, m2, relToPatterns.get(rel)));
+        } else {
+          relToContextMatcher.put(rel,
+              new FastContextPatternMatcher(m1, m2, relToPatterns.get(rel)));
+        }
       } else {
         relToContextMatcher.put(rel, 
             new StarContextPatternMatcher(m1, m2, relToPatterns.get(rel)));
