@@ -71,7 +71,7 @@ response_induced_patterns: query_expanded.xml candidates
 
 # Response from shortened induced patterns.
 response_shortened_patterns: query_expanded.xml candidates
-        $(TAC_ROOT)/components/bin/shortened_pattern_response.sh $+ $@
+	$(TAC_ROOT)/components/bin/shortened_pattern_response.sh $+ $@
 
 # Response from matching query name expansions.
 response_alternate_names: query_expanded.xml dtag dscore
