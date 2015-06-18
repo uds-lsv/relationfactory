@@ -138,7 +138,7 @@ response2012: response_all_pp12
 
 # Postprocess response for 2012 format
 %_pp12: % query_expanded.xml
-	$(TAC_ROOT)/components/bin/postprocess2012.sh $+ $@
+	$(TAC_ROOT)/components/bin/postprocess.sh $+ $@
 
 
 # If Mintz feature set is used, things get a little more complicated.
