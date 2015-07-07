@@ -22,7 +22,7 @@ unix tools, including wget
 
 If you want to use pre-trained models, download them from our server:
 
-wget http://www.lsv.uni-saarland.de/data/relationfactory_models.tar.gz
+wget https://www.lsv.uni-saarland.de/fileadmin/data/relationfactory_models.tar.gz
 tar xzf relationfactory_models.tar.gz
 
 
