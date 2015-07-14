@@ -185,6 +185,9 @@ public class Candidates {
     Multimap<String, String> relToArgtags = HashMultimap.create();
     BufferedReader cfgBr = new BufferedReader(new FileReader(relConfigFn));
     for (String line; (line = cfgBr.readLine()) != null;) {
+      if (line.isEmpty() || line.startsWith("#")) {
+        continue;
+      }
       // "<relation> argtag <TAG1> <TAG2> ... <TAGn>"
       String[] parts = line.split("\\s+",3);
       if (parts[1].equals("argtag")) {
