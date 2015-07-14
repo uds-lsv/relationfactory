@@ -74,8 +74,11 @@ public class Candidates {
       Set<String> startTags = new HashSet<String>();
       Set<String> inTags = new HashSet<String>();
       for (String tag : relToArgtags.get(rel)) {
+        // Supports both B-I-O and B-I-L-O-U tag encodings.
         startTags.add("B-" + tag);
+        startTags.add("U-" + tag);
         inTags.add("I-" + tag);
+        inTags.add("L-" + tag);
       }
       
       // Collect all tokens and matching tags.
