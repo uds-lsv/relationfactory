@@ -61,13 +61,15 @@ public class Features {
     int qStart = DocumentExtractor.getArgStart(sentence, relation, 0);
     int qEnd = DocumentExtractor.getArgEnd(sentence, relation, 0);
     
-    String slotText = 
-        DocumentExtractor.argumentText(sentence, relation, 1);
+
     String slotId = 
         DocumentExtractor.canonicalArg(sentence, 1, relation);
-    if (!slotText.equals(slotId)) {
-      System.out.println(slotText + " <-> " + slotId);
-    }
+    // TODO:
+    //String slotText = 
+    //    DocumentExtractor.argumentText(sentence, relation, 1);
+    //if (!slotText.equals(slotId)) {
+    //  System.out.println(slotText + " <-> " + slotId);
+    //}
     
     int slStart = DocumentExtractor.getArgStart(sentence, relation, 1);
     int slEnd = DocumentExtractor.getArgEnd(sentence, relation, 1);
