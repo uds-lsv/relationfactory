@@ -64,7 +64,7 @@ public class Features {
     String slotText = 
         DocumentExtractor.argumentText(sentence, relation, 1);
     String slotId = 
-        DocumentExtractor.argumentText(sentence, relation, 1);
+        DocumentExtractor.canonicalArg(sentence, relation, 1);
     if (!slotText.equals(slotId)) {
       System.out.println(slotText + " <-> " + slotId);
     }
