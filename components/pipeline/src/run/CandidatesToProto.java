@@ -85,8 +85,10 @@ public class CandidatesToProto {
       // Since Arguments could be expansions, preserve the actual query string as an argument annotation.
       sentence = DocumentExtractor.annotateArg(sentence, cand.getRel(), 0, 
           DocumentExtractor.ARG_ID, cand.getQid());
-      sentence = DocumentExtractor.annotateArg(sentence, cand.getRel(), 1, 
-          DocumentExtractor.ARG_ID, cand.getFiller());
+      sentence = DocumentExtractor.annotateArg(sentence, cand.getRel(), 1,
+          DocumentExtractor.ARG_ID, cand.getCanonicalFiller());
+      //sentence = DocumentExtractor.annotateArg(sentence, cand.getRel(), 1,
+      //    DocumentExtractor.ARG_ID, cand.getFiller());
       sentence.writeDelimitedTo(dataOut);
     }
     br.close();
