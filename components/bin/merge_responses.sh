@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # merge_responses <query_expanded_xml> <response>*
 # a response is written to stdout
 

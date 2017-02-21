@@ -3,8 +3,8 @@
 all: lib/sequor bin/tac-conll bin/specialents
 
 lib/0.4.2.tar.gz: 
-	cd lib;\
-        wget https://bitbucket.org/gchrupala/sequor/get/0.4.2.tar.gz
+	cp 0.4.2.tar.gz lib/0.4.2.tar.gz
+#	wget https://bitbucket.org/gchrupala/sequor/get/0.4.2.tar.gz
 
 lib/sequor: lib/0.4.2.tar.gz
 	cd lib;\
