@@ -140,7 +140,7 @@ public class DateMatcher {
     m = dayMonthPattern.matcher(candidate);   
     if (m.matches()) {
       day = m.group(2);
-      month = m.group(5);
+      month = m.group(4);
     }
     m = canonicalPattern_TIMEX2.matcher(candidate);
     if (m.matches()) {
@@ -148,7 +148,7 @@ public class DateMatcher {
       String yearDecimal = m.group(2);
       year = yearCentury + yearDecimal;
       month = m.group(3);
-      day = m.group(5);
+      day = m.group(4);
     }
     // obtain normalized forms
     // Numbers for months

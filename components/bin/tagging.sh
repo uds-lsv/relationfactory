@@ -15,7 +15,9 @@ $TAC_ROOT/components/ner/bin/tac-conll to-conll $1 > $1.conll.tmp
 
 echo "cat $1.conll.tmp | $TAC_ROOT/components/ner/lib/sequor/bin/seminer en > $1.sequor.tmp"
 # Run tagger
-cat $1.conll.tmp | $TAC_ROOT/components/ner/lib/sequor/bin/seminer en > $1.sequor.tmp
+#cat $1.conll.tmp | perl -CS -lpe 's/\p{Space}+/_/g' | $TAC_ROOT/components/ner/lib/sequor/bin/seminer en > $1.sequor.tmp
+#Tokens should not contain spaces - replace them with underscore "_"
+cat $1.conll.tmp | perl -CS -lpe 's/\p{Space}+/_/g' | $TAC_ROOT/components/ner/lib/sequor/bin/seminer en > $1.sequor.tmp
 
 echo "Tagging special entities."
 # Add special entities
@@ -32,4 +34,4 @@ cat $1.pasted.dtag \
            $SPECIALENT/CAUSE_DEATH $SPECIALENT/CHARGES > $2
 
 # Clean up tmp files
-rm -f $1.conll.tmp  $1.sequor.tmp $1.pasted $1.pasted.dtag
+#rm -f $1.conll.tmp  $1.sequor.tmp $1.pasted $1.pasted.dtag
